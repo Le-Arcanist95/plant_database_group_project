@@ -2,7 +2,15 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema 
 
 const plantsSchema = new Schema ({
-    
+    commonName: {
+        type: String, 
+        required: true,
+    }, 
+    sciName: {
+        type: String,
+        required: true, 
+    }
+
 })
 
 
