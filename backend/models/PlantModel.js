@@ -12,8 +12,11 @@ const plantsSchema = new Schema ({
     },
     imgUrl: {
         type: String,
-        required, true,
+        required: true,
     },
+    _id: {
+        type: Number, 
+        required: true,
 })
 
 
