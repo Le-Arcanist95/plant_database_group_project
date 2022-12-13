@@ -9,8 +9,11 @@ const plantsSchema = new Schema ({
     sciName: {
         type: String,
         required: true, 
-    }
-
+    },
+    imgUrl: {
+        type: String,
+        required, true,
+    },
 })
 
 
