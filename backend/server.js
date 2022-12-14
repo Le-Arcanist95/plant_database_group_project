@@ -14,7 +14,7 @@ mongoose.set('strictQuery', false);
 mongoose.connect(uri, () => console.log("Successfully connected to the database."));
 
 // Routes
-app.use('plants', require('./routes/plantRouter'));
+app.use('/plants', require('./routes/plantRouter'));
 
 // Error Handler
 app.use((err, req, res, next) => {

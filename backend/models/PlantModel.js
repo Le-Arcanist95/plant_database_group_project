@@ -1,10 +1,10 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema 
-const CommentModel = require("./CommentModel")
+const { CommentSchema } = require("./CommentModel")
 
-const plantsSchema = new Schema ({
+const plantSchema = new Schema ({
     comments: {
-        type: [CommentModel], 
+        type: [CommentSchema], 
         default: undefined,
     },
     liked: Number,
@@ -19,4 +19,4 @@ const plantsSchema = new Schema ({
 })
 
 
-module.exports = mongoose.model("Plants", plantsSchema)
+module.exports = mongoose.model("Plant", plantSchema)
