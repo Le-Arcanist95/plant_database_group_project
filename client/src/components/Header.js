@@ -1,4 +1,5 @@
 import React from "react";
+import Searchbar from "./Searchbar";
 import "./styles/header.css";
 // import { Link } from "react-router-dom";
 
@@ -13,7 +14,9 @@ export default function Header() {
             {/* HERO */}
             <section className="hero">
                 <h1>PlantProject</h1>
+                <Searchbar />
             </section>
+
 
             <div class="custom-shape-divider-bottom-1671001641">
                 <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">

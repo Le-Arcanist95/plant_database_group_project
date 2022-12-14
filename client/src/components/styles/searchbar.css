@@ -1,0 +1,40 @@
+.searchbar-wrapper{
+    border-radius: 50px;
+    /* border: 1px solid black; */
+    width: 80%;
+    position: relative;
+}
+
+
+button{
+    background-color: var(--green);
+    color: white;
+    position:absolute;
+    right:0;
+    top:0;
+    bottom: 0;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding: .5rem;
+    outline: none;
+    border: none
+}
+
+button:hover{
+    background-color: var(--green-shade);
+}
+
+input{
+    width: 100%;
+    padding: .5rem;
+    border-radius: 50px;
+    border: none;
+    font-family: var(--primary-font);
+}
+
+@media screen and (min-width: 500px) {
+    .searchbar-wrapper{
+        width: 60%;
+    }
+    
+}
