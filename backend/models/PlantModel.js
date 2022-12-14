@@ -4,17 +4,17 @@ const CommentModel = require("./CommentModel")
 
 const plantsSchema = new Schema ({
     comments: {
-        type: [CommentModel],
-        default: undefined
+        type: [CommentModel], 
+        default: undefined,
     },
     liked: Number,
-    api_id: {
-        type: String, 
-        required: true,
-    },
     api_slug: {
         type: String,
-        required: true, 
+        required: true,
+    },
+    api_id: {
+        type: Number, 
+        required: true,
     }
 })
 
