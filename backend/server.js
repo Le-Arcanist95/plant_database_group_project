@@ -9,7 +9,7 @@ app.use(express.json()); // Used to parse the req.body into json.
 app.use(morgan('dev')); // Logs requests to the console
 
 // Database Connection
-const uri = "mongodb+srv://<username>:" + encodeURIComponent("p!=Mb6S&B(XBX,b[5S#ea") + "@cluster0.jd6rnhp.mongodb.net/?retryWrites=true&w=majority"
+const uri = "mongodb+srv://Lev_Arcanist:" + encodeURIComponent("p!=Mb6S&B(XBX,b[5S#ea") + "@cluster0.jd6rnhp.mongodb.net/?retryWrites=true&w=majority"
 mongoose.set('strictQuery', false);
 mongoose.connect(uri, () => console.log("Successfully connected to the database."));
 
@@ -22,7 +22,6 @@ app.use((err, req, res, next) => {
     return res.status(500).send({errMsg: err.message}); // Set error status and return error message to user.
 });
 
-console.log("I exist for no reason.")
 
 // Port and Listen
 const port = process.env.PORT || 5000;
