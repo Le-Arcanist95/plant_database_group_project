@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 app.use(express.json()); // Used to parse the req.body into json.
 app.use(morgan('dev')); // Logs requests to the console
 
+
 // Database Connection
 const uri = "mongodb+srv://Lev_Arcanist:" + encodeURIComponent("p!=Mb6S&B(XBX,b[5S#ea") + "@cluster0.jd6rnhp.mongodb.net/?retryWrites=true&w=majority"
 mongoose.set('strictQuery', false);

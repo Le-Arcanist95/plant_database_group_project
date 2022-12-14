@@ -1,10 +1,10 @@
 const express = require("express");
-const PlantModel = require("../models/PlantModel.js");
-const plantRouter = express.Router();
+const CommentModel = require("../models/CommentModel.js");
+const commentRouter = express.Router();
 
 
-plantRouter.get("/", (req, res, next) => {
-        PlantModel.find((err, results) => {
+commentRouter.get("/", (req, res, next) => {
+    CommentModel.find((err, results) => {
             if (err) {
                 res.status(400);
                 return next(err);
@@ -13,17 +13,17 @@ plantRouter.get("/", (req, res, next) => {
         });
     });
 
-plantRouter.get("/:plantId", (req, res, next) => {
-    PlantModel.find({_id: req.params._id}, (err, plant) => {
+commentRouter.get("/:commentId", (req, res, next) => {
+    CommentModel.find({_id: req.params._id}, (err, comment) => {
         if (err) {
             res.status(400);
             return next(err)
         }
-        res.status(200).send(plant)
+        res.status(200).send(comment)
     })
 })
-plantRouter.put("/:plantId", (req, res, next) => {
-    PlantModel.findOneAndUpdate(
+commentRouter.put("/:commentId", (req, res, next) => {
+    CommentModel.findOneAndUpdate(
         {_id: req.params._id},
         req.body, 
         {new:true},
@@ -36,4 +36,4 @@ plantRouter.put("/:plantId", (req, res, next) => {
         })
 })
 
-module.exports = plantRouter;
+module.exports = commentRouter;

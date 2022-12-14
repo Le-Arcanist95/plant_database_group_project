@@ -14,7 +14,7 @@ export default function CommentForm() {
             <form>
                 <label for="newComment">Comment: </label>
                 <input type="text" name="newComment" onChange={handleChange}></input>
-                <button>Submit</button>
+                <button onClick={handleSubmit}>Submit</button>
             </form>
         </>
     )

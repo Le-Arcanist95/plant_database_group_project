@@ -7,10 +7,11 @@ function PlantContextProvider(props) {
     const [collection, setCollection] = React.useState([])
     const [newComment, setNewComment] = React.useState({})
 
-    function addNewComment() {
-
+    function addNewComment(plantId) {
+        axios.put(``)
+    
     }
- 
+    
     const soil_humidity_selected = false
     const min = 1
     const max = 3
