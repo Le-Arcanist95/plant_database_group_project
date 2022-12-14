@@ -17,6 +17,7 @@ const plantsSchema = new Schema ({
     _id: {
         type: Number, 
         required: true,
+    }
 })
 
 
