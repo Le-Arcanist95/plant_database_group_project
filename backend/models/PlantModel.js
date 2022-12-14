@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
-const Schema = mongoose.Schema
-const CommentSchema = require("./CommentModel") 
+const Schema = mongoose.Schema 
+const CommentModel = require("./CommentModel")
 
 const plantsSchema = new Schema ({
     comments: {
@@ -15,8 +15,7 @@ const plantsSchema = new Schema ({
     api_id: {
         type: Number, 
         required: true,
-    },
-    
+    }
 })
 
 
