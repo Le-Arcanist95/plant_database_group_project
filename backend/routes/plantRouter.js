@@ -1,8 +1,8 @@
 const express = require("express");
 const Model = require("backend\models\PlantModel.js");
-const Router = express.Router();
+const plantRouter = express.Router();
 
-Router.route("/")
+plantRouter.route("/")
     .get((req, res, next) => {
         Model.get(req.body, (err, results) => {
             if (err) {
@@ -12,3 +12,5 @@ Router.route("/")
             res.status(200).send(results);
         });
     });
+
+module.exports = plantRouter;
