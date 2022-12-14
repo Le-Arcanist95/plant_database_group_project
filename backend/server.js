@@ -22,6 +22,8 @@ app.use((err, req, res, next) => {
     return res.status(500).send({errMsg: err.message}); // Set error status and return error message to user.
 });
 
+console.log("I exist for no reason.")
+
 // Port and Listen
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
