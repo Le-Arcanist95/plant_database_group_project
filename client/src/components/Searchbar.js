@@ -15,7 +15,10 @@ export default function Searchbar(props) {
         <>
             <div className="searchbar-wrapper">
                 <input type="search" value={inputValue} onChange={handleChange} />
-                <button onClick={handleSubmit}>Search</button>
+                <button onClick={handleSubmit}>
+                    <i class="bi bi-search"></i>
+                    Search
+                </button>
             </div>
         </>
     );

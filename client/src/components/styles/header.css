@@ -12,16 +12,18 @@ nav{
     backdrop-filter: blur(10px);
     position: absolute;
     width: 100%;
+    display: flex;
+    justify-content: end;
 }
 
-nav p{
+nav .link{
     padding: .5rem;
     cursor: pointer;
     width: fit-content;
-    margin-left: auto;
+    color: white;
 }
 
-nav p:hover{
+nav .link:hover{
     color: var(--white-shade);
 }
 
@@ -33,7 +35,7 @@ nav p:hover{
     height: 100%; 
 }
 
-h1{
+.logo{
     font-size: 2rem;
     font-family: var(--decor-font);
 }
@@ -63,7 +65,7 @@ h1{
 
 /* md+ screens */
 @media screen and (min-width: 500px) {
-    h1{
+    .logo{
         font-size: 4rem;
     }
 }

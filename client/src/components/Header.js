@@ -1,19 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Searchbar from "./Searchbar";
 import "./styles/header.css";
-// import { Link } from "react-router-dom";
+
+
+// TODO: on window load animate logo in
 
 export default function Header() {
+
     return (
         <header className="header-container">
             <nav>
-                {/* <Link to="../pages/About.js">About</Link> */}
-                <p>About</p>
+                <Link to="/about" className="link">About</Link>
             </nav>
 
             {/* HERO */}
             <section className="hero">
-                <h1>PlantProject</h1>
+                <span className="logo">PlantProject</span>
                 <Searchbar />
             </section>
 
