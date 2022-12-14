@@ -36,5 +36,7 @@ input{
     .searchbar-wrapper{
         width: 60%;
     }
-    
+    input{
+        padding: .8rem;
+    }
 }

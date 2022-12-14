@@ -15,9 +15,10 @@ nav{
 }
 
 nav p{
-    padding: 1rem;
-    text-align: end;
+    padding: .5rem;
     cursor: pointer;
+    width: fit-content;
+    margin-left: auto;
 }
 
 nav p:hover{
