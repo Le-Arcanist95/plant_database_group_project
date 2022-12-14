@@ -9,7 +9,7 @@ export default function PlantCard(props) {
     })
     return (
         <div className="plant-card-container">
-            
+            {commentsHtml}
         </div>
     );
 };
