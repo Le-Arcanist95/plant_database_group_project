@@ -1,0 +1,19 @@
+:root{
+    --creme: #fffaeb;
+    --white-hover: rgb(223, 222, 222);
+    --primary-font: 'Montserrat', sans-serif;
+    --decor-font: 'Unbounded', cursive;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--creme);
+    font-family: var(--primary-font);
+    height: 100vh;
+}
+
