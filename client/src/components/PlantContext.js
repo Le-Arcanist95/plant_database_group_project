@@ -1,4 +1,5 @@
 import React from "react";
+const PlantContext = React.createContext();
 
 function PlantContextProvider(props) {
     return (
@@ -8,6 +9,5 @@ function PlantContextProvider(props) {
     )
 }
 
-const PlantContext = React.createContext();
 
 export { PlantContextProvider, PlantContext };
