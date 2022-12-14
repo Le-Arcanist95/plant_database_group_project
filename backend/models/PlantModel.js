@@ -1,23 +1,22 @@
 const mongoose = require("mongoose")
-const Schema = mongoose.Schema 
+const Schema = mongoose.Schema
+const CommentSchema = require("./CommentModel") 
 
 const plantsSchema = new Schema ({
-    commonName: {
-        type: String, 
-        required: true,
-    }, 
-    sciName: {
-        type: String,
-        required: true, 
+    comments: {
+        type: [CommentModel], 
+        default: undefined,
     },
-    imgUrl: {
+    liked: Number,
+    api_slug: {
         type: String,
         required: true,
     },
-    _id: {
+    api_id: {
         type: Number, 
         required: true,
-    }
+    },
+    
 })
 
 
