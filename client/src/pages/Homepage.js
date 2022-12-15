@@ -12,7 +12,7 @@ export default function Homepage() {
     // />));
     return (
         <div className="homepage-container">
-            <Header />
+            <Header isActive={{ home: true }} />
             {/* {collectionHtml} */}
             <Footer />
         </div>

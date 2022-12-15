@@ -21,10 +21,15 @@ nav .link{
     cursor: pointer;
     width: fit-content;
     color: white;
+    text-decoration: none;
 }
 
 nav .link:hover{
     color: var(--white-shade);
+}
+
+nav .link.active{
+    font-weight: bolder;
 }
 
 .hero{
