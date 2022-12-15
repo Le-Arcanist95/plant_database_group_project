@@ -1,8 +1,6 @@
 import React from "react";
 import "./styles/footer.css";
 
-// TODO: keep footer at the bottom!
-
 export default function Footer() {
 
     return (
