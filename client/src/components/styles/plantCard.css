@@ -1,0 +1,11 @@
+.plant-card-container{
+    width: 200px;
+    height: 200px;
+    border: 2px solid var(--green);
+    border-radius: 5px;
+}
+
+.plant-card-container img{
+    width: 50px;
+    object-fit: cover;
+}

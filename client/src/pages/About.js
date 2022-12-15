@@ -6,7 +6,7 @@ import "./styles/about.css";
 export default function About() {
     return (
         <div className="aboutpage-container">
-            <Header />
+            <Header isActive={{ about: true }} />
             <h1>About the developers</h1>
             <Footer />
         </div>
