@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PlantContext } from "../components/PlantContext";
+import "./styles/homepage.css";
 import PlantCard from "../components/PlantCard";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Loader from "../components/Loader";
 
 export default function Homepage() {
-    // const { collection } = React.useContext(PlantContext);
-    // const collectionHtml = collection.map(plant => (<PlantCard
-    //     key={plant.id}
-    //     {...plant}
-    // />));
+    const { collection } = useContext(PlantContext);
+
+    const collectionHtml = collection.map(plant => (<PlantCard
+        key={plant.id}
+        {...plant}
+    />));
+
     return (
         <div className="homepage-container">
             <Header isActive={{ home: true }} />
-            {/* {collectionHtml} */}
+
+            <section className="collection-wrapper">
+                {collection.length > 0 ? collectionHtml : <Loader />}
+            </section>
+
             <Footer />
         </div>
     );

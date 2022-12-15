@@ -1,16 +1,19 @@
 import React from "react";
-import CommentCard from "./CommentCard";
+import "./styles/plantCard.css";
+// import CommentCard from "./CommentCard";
 
 export default function PlantCard(props) {
-    const commentsHtml = props.comments.map((comment) => {
-        <CommentCard 
-            {...props} 
-            key={comment.id}
-        />
-    })
+    // const commentsHtml = props.comments.map((comment) => {
+    //     <CommentCard 
+    //         {...props} 
+    //         key={comment.id}
+    //     />
+    // })
     return (
         <div className="plant-card-container">
-            {commentsHtml}
+            {/* {commentsHtml} */}
+            <img src={props.image_url} alt="plant" />
+            <p>{props.common_name}</p>
         </div>
     );
 };
