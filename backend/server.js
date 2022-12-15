@@ -7,7 +7,7 @@ const app = express();
 const params = {  
     origin: 'http://localhost:3000/',  
     ip: '127.0.0.1',  
-    token: 'NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag'
+    token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o'
 }
 const getToken = async () => {  
     const response = await fetch('https://trefle.io/api/auth/claim', {      
