@@ -1,8 +1,26 @@
 // Import required modules and file
 const express = require("express");
-const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const app = express();
+
+const params = {  
+    origin: 'http://localhost:3000/',  
+    ip: '127.0.0.1',  
+    token: 'NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag'
+}
+const getToken = async () => {  
+    const response = await fetch('https://trefle.io/api/auth/claim', {      
+        method: 'post',      
+        body: JSON.stringify(params),      
+        headers: { 'Content-Type': 'application/json' }    
+    });  
+    const json = await response.json();  
+    console.log(json);
+}
+
+getToken();
+
 
 // Middleware for every request
 app.use(express.json()); // Used to parse the req.body into json.

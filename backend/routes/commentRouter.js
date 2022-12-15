@@ -3,6 +3,7 @@ const CommentModel = require("../models/CommentModel.js");
 const commentRouter = express.Router();
 
 
+
 commentRouter.get("/", (req, res, next) => {
     CommentModel.find((err, results) => {
             if (err) {
