@@ -18,9 +18,22 @@ function PlantContextProvider(props) {
     const queryString = ""
 
     function getAll() {
-        axios.get(`https://trefle.io/api/v1/plants?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag${queryString}`)
-        .then(res => console.log(res.body))
-        .catch(error => console.log(error))
+        // const url = `https://trefle.io/api/v1/plants?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag${queryString}`; 
+        const api = 'https://trefle.io/api/v1/plants'
+        const SECRET_TOKEN = "NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag"
+        axios({
+            method: 'get',
+            url: api,
+            headers: {
+                "Access-Control-Allow-Origin": "http://localhost:3000"
+            },
+            withCredentials: false,
+            params: {
+                token: SECRET_TOKEN,
+            },
+        })
+            .then(res => console.log(res.body))
+            .catch(error => console.log(error))
     }
 
     useEffect(() => {

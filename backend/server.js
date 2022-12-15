@@ -15,11 +15,15 @@ const getToken = async () => {
         body: JSON.stringify(params),      
         headers: { 'Content-Type': 'application/json' }    
     });  
-    const json = await response.json();  
-    console.log(json);
-}
+    const data = await response.json();
+    return data;
+};
 
-getToken();
+app.get('/auth', async (req, res) => {
+    const authToken = await getToken();
+    console.log(authToken);
+    res.send(authToken);
+});
 
 
 // Middleware for every request
@@ -31,6 +35,9 @@ app.use(morgan('dev')); // Logs requests to the console
 const uri = "mongodb+srv://Lev_Arcanist:" + encodeURIComponent("p!=Mb6S&B(XBX,b[5S#ea") + "@cluster0.jd6rnhp.mongodb.net/?retryWrites=true&w=majority"
 mongoose.set('strictQuery', false);
 mongoose.connect(uri, () => console.log("Successfully connected to the database."));
+
+// Request and save data from TrefleAPI
+
 
 // Routes
 app.use('/plants', require('./routes/plantRouter'));
