@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"
+import axios from "axios";
 const PlantContext = React.createContext();
 
 
 function PlantContextProvider(props) {
+
     const [authToken, setAuthToken] = useState('');
     const [collection, setCollection] = useState([]);
     const [newComment, setNewComment] = useState({});
-
 
     
     // const soil_humidity_selected = false
     // const min = 1
     // const max = 3
     // const queryString = ""
+
+    // function getAll() {
+    //    axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag${queryString}`)
+    //        .then(res => setCollection(res.data.data))
+    //        .catch(error => console.log(error));
+    // }
 
 
     /* Currently unusable? Auth token is not accepted by trefle. */
@@ -28,6 +34,15 @@ function PlantContextProvider(props) {
 
     // },[]);
 
+
+    
+    // Condition true if string is not empty
+    // if(authToken) { getAll()};
+    // useEffect(() => {
+        // Condition true if string is not empty
+        // if(authToken) { getAll()};
+   //     }
+    
     function getAll() { 
         const api = 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants'
         axios({
@@ -40,24 +55,20 @@ function PlantContextProvider(props) {
         .then(res => console.log(res))
         .catch(error => console.log(error))
     }
-    // Condition true if string is not empty
-    // if(authToken) { getAll()};
     useEffect(() => {
-        // Condition true if string is not empty
-        // if(authToken) { getAll()};
         getAll();
     }, []);
 
     return (
         <PlantContext.Provider value={{
-            collection:collection,
+            collection: collection,
             newComment: newComment,
             setNewComment: setNewComment,
             addNewComment: addNewComment
         }}>
             {props.children}
         </PlantContext.Provider>
-    )
+    );
 }
 
 
