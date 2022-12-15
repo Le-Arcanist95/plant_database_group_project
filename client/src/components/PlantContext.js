@@ -8,10 +8,7 @@ function PlantContextProvider(props) {
     const [collection, setCollection] = useState([]);
     const [newComment, setNewComment] = useState({});
 
-    function addNewComment(plantId) {
-        axios.put(``)
-    
-    }
+
     
     // const soil_humidity_selected = false
     // const min = 1
@@ -31,23 +28,25 @@ function PlantContextProvider(props) {
 
     // },[]);
 
+    function getAll() { 
+        const api = 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants'
+        axios({
+            method: 'get',
+            url: api,
+            params: {
+                token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
+            },
+        })
+        .then(res => console.log(res))
+        .catch(error => console.log(error))
+    }
+    // Condition true if string is not empty
+    // if(authToken) { getAll()};
     useEffect(() => {
-        function getAll() { 
-            const api = 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants'
-            axios({
-                method: 'get',
-                url: api,
-                params: {
-                    token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
-                },
-            })
-                .then(res => console.log(res))
-                .catch(error => console.log(error))
-        }
         // Condition true if string is not empty
         // if(authToken) { getAll()};
         getAll();
-    }, [authToken]);
+    }, []);
 
     return (
         <PlantContext.Provider value={{
