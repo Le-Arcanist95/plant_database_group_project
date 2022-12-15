@@ -25,12 +25,6 @@ function PlantContextProvider(props) {
 
     }
 
-    // const soil_humidity_selected = false
-    // const min = 1
-    // const max = 3
-    // const queryString = ""
-
-
     /* Currently unusable? Auth token is not accepted by trefle. */
     // useEffect(() => {
     //     // Request authToken from server-side
@@ -62,22 +56,8 @@ function PlantContextProvider(props) {
     // }, [authToken]);
 
     useEffect(() => {
-        function getAll() {
-            const api = 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants';
-            axios({
-                method: 'get',
-                url: api,
-                params: {
-                    token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
-                },
-            })
-                .then(res => console.log(res))
-                .catch(error => console.log(error));
-        }
-        // Condition true if string is not empty
-        // if(authToken) { getAll()};
         getAll();
-    }, [authToken]);
+    }, []);
 
     return (
         <PlantContext.Provider value={{
