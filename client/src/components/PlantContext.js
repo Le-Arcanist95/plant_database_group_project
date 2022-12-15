@@ -17,26 +17,24 @@ function PlantContextProvider(props) {
     // const min = 1
     // const max = 3
     // const queryString = ""
+
     useEffect(() => {
+        // Request authToken from server-side
         const getAuthToken = async () => {
             axios.get('/auth')
                 .then(res => setAuthToken(res.data.token))
                 .catch(err => console.log(err));
         };
         getAuthToken();
+
     },[]);
 
     useEffect(() => {
-        function getAll() {
-            
-            // const url = `https://trefle.io/api/v1/plants?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag${queryString}`; 
+        function getAll() { 
             const api = 'https://trefle.io/api/v1/plants'
             axios({
                 method: 'get',
                 url: api,
-                headers: {
-                    "Access-Control-Allow-Origin": "http://localhost:3000"
-                },
                 withCredentials: false,
                 params: {
                     token: authToken,
@@ -45,7 +43,8 @@ function PlantContextProvider(props) {
                 .then(res => console.log(res.body))
                 .catch(error => console.log(error))
         }
-        getAll();
+        // Condition true if string is not empty
+        if(authToken) { getAll()};
     }, [authToken]);
 
     return (
