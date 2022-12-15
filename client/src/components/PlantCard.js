@@ -11,7 +11,12 @@ export default function PlantCard(props) {
     })
     return (
         <div className="plant-card-container">
-            
+            <section>    
+            </section>
+            {commentsHtml}
+            <CommentForm 
+                id={props.id}
+            />
         </div>
     );
 };
