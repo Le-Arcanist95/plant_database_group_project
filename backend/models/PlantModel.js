@@ -4,8 +4,8 @@ const CommentModel = require("./CommentModel")
 
 const plantsSchema = new Schema ({
     comments: {
-        type: [CommentModel], 
-        default: undefined,
+            type: Schema.Types.ObjectId,
+            ref: "CommentModel"
     },
     liked: Number,
     api_slug: {

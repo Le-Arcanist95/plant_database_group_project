@@ -1,5 +1,5 @@
 const express = require("express");
-const Model = require("backend\models\PlantModel.js");
+const Model = require("../models/PlantModel");
 const plantRouter = express.Router();
 
 plantRouter.route("/")
