@@ -9,21 +9,18 @@ function PlantContextProvider(props) {
     const [collection, setCollection] = useState([]);
     const [newComment, setNewComment] = useState({});
 
-    const soil_humidity_selected = false;
-    const min = 1;
-    const max = 3;
-    const queryString = "";
+    
+    // const soil_humidity_selected = false
+    // const min = 1
+    // const max = 3
+    // const queryString = ""
 
-    function getAll() {
-        axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag${queryString}`)
-            .then(res => setCollection(res.data.data))
-            .catch(error => console.log(error));
-    }
+    // function getAll() {
+    //    axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag${queryString}`)
+    //        .then(res => setCollection(res.data.data))
+    //        .catch(error => console.log(error));
+    // }
 
-    function addNewComment(plantId) {
-        axios.put(``);
-
-    }
 
     /* Currently unusable? Auth token is not accepted by trefle. */
     // useEffect(() => {
@@ -37,24 +34,27 @@ function PlantContextProvider(props) {
 
     // },[]);
 
-    // useEffect(() => {
-    //     function getAll() {
-    //         const api = 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants';
-    //         axios({
-    //             method: 'get',
-    //             url: api,
-    //             params: {
-    //                 token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
-    //             },
-    //         })
-    //             .then(res => console.log(res))
-    //             .catch(error => console.log(error));
-    //     }
-    //     // Condition true if string is not empty
-    //     // if(authToken) { getAll()};
-    //     getAll();
-    // }, [authToken]);
 
+    
+    // Condition true if string is not empty
+    // if(authToken) { getAll()};
+    // useEffect(() => {
+        // Condition true if string is not empty
+        // if(authToken) { getAll()};
+   //     }
+    
+    function getAll() { 
+        const api = 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants'
+        axios({
+            method: 'get',
+            url: api,
+            params: {
+                token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
+            },
+        })
+        .then(res => console.log(res))
+        .catch(error => console.log(error))
+    }
     useEffect(() => {
         getAll();
     }, []);
