@@ -18,33 +18,35 @@ function PlantContextProvider(props) {
     // const max = 3
     // const queryString = ""
 
-    useEffect(() => {
-        // Request authToken from server-side
-        const getAuthToken = async () => {
-            axios.get('/auth')
-                .then(res => setAuthToken(res.data.token))
-                .catch(err => console.log(err));
-        };
-        getAuthToken();
 
-    },[]);
+    /* Currently unusable? Auth token is not accepted by trefle. */
+    // useEffect(() => {
+    //     // Request authToken from server-side
+    //     const getAuthToken = async () => {
+    //         axios.get('/auth')
+    //             .then(res => setAuthToken(res.data.token))
+    //             .catch(err => console.log(err));
+    //     };
+    //     getAuthToken();
+
+    // },[]);
 
     useEffect(() => {
         function getAll() { 
-            const api = 'https://trefle.io/api/v1/plants'
+            const api = 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants'
             axios({
                 method: 'get',
                 url: api,
-                withCredentials: false,
                 params: {
-                    token: authToken,
+                    token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
                 },
             })
-                .then(res => console.log(res.body))
+                .then(res => console.log(res))
                 .catch(error => console.log(error))
         }
         // Condition true if string is not empty
-        if(authToken) { getAll()};
+        // if(authToken) { getAll()};
+        getAll();
     }, [authToken]);
 
     return (
