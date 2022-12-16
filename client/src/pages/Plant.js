@@ -8,8 +8,7 @@ let commentsHtml
 export default function Plant(props) {
     const {selectedPlant} = React.useContext(PlantContext)
     console.log(selectedPlant)
-    if (selectedPlant) {
-        
+    if (selectedPlant) { 
         commentsHtml = selectedPlant.comments.map((comment, index) => {
             return (
             <CommentCard
