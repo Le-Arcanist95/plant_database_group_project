@@ -8,11 +8,12 @@ import CommentForm from "../components/CommentForm";
 let commentsHtml
 export default function Plant(props) {
     const plantId = useParams()
-    console.log(plantId)
+    console.log(plantId.plantId)
     const {collection} = React.useContext(PlantContext)
-    let selectedPlant = collection.find(plant => plant.id = plantId)
+    console.log(collection)
+    let selectedPlant = collection.find(plant => plant.id == plantId.plantId)
     console.log(selectedPlant)
-    // if (selectedPlant) { 
+    // if (selectedPlant.comments) { 
     //     commentsHtml = selectedPlant.comments.map((comment, index) => {
     //         return (
     //         <CommentCard
