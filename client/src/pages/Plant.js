@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom"
 import PlantCard from "../components/PlantCard";
 import { PlantContext } from "../components/PlantContext";
 import CommentCard from "../components/CommentCard";
@@ -6,24 +7,28 @@ import CommentForm from "../components/CommentForm";
 
 let commentsHtml
 export default function Plant(props) {
-    const {selectedPlant} = React.useContext(PlantContext)
+    const plantId = useParams()
+    console.log(plantId)
+    const {collection} = React.useContext(PlantContext)
+    let selectedPlant = collection.find(plant => plant.id = plantId)
     console.log(selectedPlant)
-    if (selectedPlant) { 
-        commentsHtml = selectedPlant.comments.map((comment, index) => {
-            return (
-            <CommentCard
-                {...comment}
-                key={index}
-            />);
-        });
-    }
+    // if (selectedPlant) { 
+    //     commentsHtml = selectedPlant.comments.map((comment, index) => {
+    //         return (
+    //         <CommentCard
+    //             {...comment}
+    //             key={index}
+    //         />);
+    //     });
+    // }
     return (
-        <div className="plantpage-container">            
+        <div className="plantpage-container">
+            <h1>{selectedPlant.common_name}</h1>
+            <h2>{selectedPlant.scientific_name}</h2>
+            <img src={selectedPlant.image_url} alt={`image of ${selectedPlant.common_name}`}/>            
+            
             {commentsHtml ? {commentsHtml} : ""}
-            <CommentForm
-                // key={selectedPlant.id}
-                // id={selectedPlant.id}
-            />
+            <CommentForm />
         </div>
     );
 };
