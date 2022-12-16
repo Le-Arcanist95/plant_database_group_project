@@ -40,10 +40,10 @@ export default function Filters(props) {
                 <h1 onClick={toggleFilters}>{`Hide Filters`}</h1>
                 <section className="filters-wrapper" >
                     <form className="filters-Form">
-                        <label htmlFor="soil_humidity_min"></label>
+                        <label htmlFor="soil_humidity_min">Minimum Soil Humidity</label>
                         <input name="soil_humidity_min" type="Number" min="0" max="9" onChange={handleChange} value={searchParams.soil_humidity_min}>
                         </input>
-                        <label htmlFor="soil_humidity_max"></label>
+                        <label htmlFor="soil_humidity_max">Maximum Soil Humidity</label>
                         <input name="soil_humidity_max" type="Number" min="1" max="10" onChange={handleChange} value={searchParams.soil_humidity_max}></input>
                         <button className="bi bi-search" onClick={handleSubmit}></button>
                     </form>
