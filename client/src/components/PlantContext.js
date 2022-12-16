@@ -6,8 +6,8 @@ const PlantContext = React.createContext();
 function PlantContextProvider(props) {
 
     const [authToken, setAuthToken] = useState('');
-    const [searchParams, setSearchParams] = useState("")
-    const [otherParams, setOtherParams] = useState("")
+    const [searchParams, setSearchParams] = useState({})
+    const [searchQuery, setSearchQuery] = useState("")
     const [collection, setCollection] = useState([]);
     const [selectedPlant, setSelectedPlant] = useState()
     const [newComment, setNewComment] = useState({});
@@ -16,13 +16,12 @@ function PlantContextProvider(props) {
         axios.put('')
     }
     
-    const soil_humidity_selected = false
     const min = 1
     const max = 3
     console.log(searchParams)
 
     function getAll() {
-       axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag`)
+       axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/species?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag`)
            .then(res => setCollection(res.data.data))
            .catch(error => console.log(error));
     }
@@ -80,8 +79,7 @@ function PlantContextProvider(props) {
             selectedPlant: selectedPlant,
             setSelectedPlant: setSelectedPlant,
             searchParams: searchParams,
-            setSearchParams: setSearchParams,
-            setOtherParams: setOtherParams
+            setSearchParams: setSearchParams
         }}>
             {props.children}
         </PlantContext.Provider>
