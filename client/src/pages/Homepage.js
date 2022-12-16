@@ -7,10 +7,12 @@ import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 
 export default function Homepage() {
-    const { collection } = useContext(PlantContext);
+    const { collection, setParams } = useContext(PlantContext);
     console.log(collection)
 
-    const collectionHtml = collection.map(plant => {
+    let collectionHtml
+    if (collection.length > 1) {
+        collectionHtml = collection.map(plant => {
         return ( 
             <PlantCard
                 key={plant.id}
@@ -18,7 +20,7 @@ export default function Homepage() {
                 {...plant}
             />
             )
-        });
+        })} else if (collection) ;
 
     return (
         <div className="homepage-container">
