@@ -12,7 +12,7 @@ export default function CommentForm() {
     return (
         <>
             <form>
-                <label for="newComment">Comment: </label>
+                <label htmlFor="newComment">Comment: </label>
                 <input type="text" name="newComment" onChange={handleChange}></input>
                 <button onClick={handleSubmit}>Submit</button>
             </form>

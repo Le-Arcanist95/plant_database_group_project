@@ -12,7 +12,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Homepage />} />
                     <Route path="/about" element={<About />} />
-                    <Route path="/plant" element={<Plant />} />
+                    <Route path="/plant/:plantId" element={<Plant />} />
                 </Routes>
             </PlantContextProvider>
         </div >
