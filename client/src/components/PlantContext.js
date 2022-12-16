@@ -6,30 +6,30 @@ const PlantContext = React.createContext();
 function PlantContextProvider(props) {
 
     const [authToken, setAuthToken] = useState('');
-    const [searchParams, setSearchParams] = useState("")
-    const [otherParams, setOtherParams] = useState("")
+    const [searchParams, setSearchParams] = useState("");
+    const [otherParams, setOtherParams] = useState("");
     const [collection, setCollection] = useState([]);
-    const [selectedPlant, setSelectedPlant] = useState()
+    const [selectedPlant, setSelectedPlant] = useState();
     const [newComment, setNewComment] = useState({});
 
     function addNewComment(plantId) {
-        axios.put('')
+        axios.put('');
     }
-    
-    const soil_humidity_selected = false
-    const min = 1
-    const max = 3
-    console.log(searchParams)
+
+    const soil_humidity_selected = false;
+    const min = 1;
+    const max = 3;
+    console.log(searchParams);
 
     function getAll() {
-       axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag`)
-           .then(res => setCollection(res.data.data))
-           .catch(error => console.log(error));
+        axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag`)
+            .then(res => setCollection(res.data.data))
+            .catch(error => console.log(error));
     }
     function getOne() {
-       axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants${searchParams.search === "" ?  '?' : `/search?q=${searchParams.search}&` }token=yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o`)
-           .then(res => setCollection(res.data.data))
-           .catch(error => console.log(error));
+        axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants${searchParams.search === "" ? '?' : `/search?q=${searchParams.search}&`}token=yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o`)
+            .then(res => setCollection(res.data.data))
+            .catch(error => console.log(error));
     }
 
     /* Currently unusable? Auth token is not accepted by trefle. */
@@ -41,7 +41,7 @@ function PlantContextProvider(props) {
                 .catch(err => console.log(err));
         };
         getAuthToken();
-    },[]);
+    }, []);
 
     // // Condition true if string is not empty
     // if(authToken) { getAll()};
@@ -49,7 +49,7 @@ function PlantContextProvider(props) {
     //     // Condition true if string is not empty
     //     if(authToken) { getAll()};
     //    })
-    
+
     // function getAll() { 
     //     const api = `https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants${`/${searchParams}`}`
     //     console.log(api)
@@ -63,10 +63,11 @@ function PlantContextProvider(props) {
     //     .then(res => setCollection(res.data.data))
     //     .catch(error => console.log(error))
     // }
-   useEffect(() => {
+    useEffect(() => {
         getAll();
     }, [authToken]);
-   useEffect(() => {
+
+    useEffect(() => {
         getOne();
     }, [searchParams]);
 
