@@ -3,7 +3,10 @@ import {PlantContext} from "./PlantContext.js"
 import "./styles/searchbar.css";
 
 export default function Searchbar(props) {
-    const [inputValue, setInputValue] = useState({ search : ""});
+    const [inputValue, setInputValue] = useState({ 
+        search : "",
+        
+    });
     const {setSearchParams, setOtherParams} = useContext(PlantContext)
 
     const handleChange = (e) => {

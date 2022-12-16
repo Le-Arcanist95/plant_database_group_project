@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from "react-router-dom"
-import PlantCard from "../components/PlantCard";
 import { PlantContext } from "../components/PlantContext";
 import CommentCard from "../components/CommentCard";
 import CommentForm from "../components/CommentForm";
@@ -33,8 +32,9 @@ export default function Plant(props) {
     if (comments) { 
     commentsHtml = comments.map((comment, index) => {
             return (
-            <CommentCard
+            <CommentCard               
                 key={index}
+                {...comment}
             />);
         });
     }
