@@ -13,7 +13,7 @@ export default function Plant(props) {
     console.log(collection)
     let selectedPlant = collection.find(plant => plant.id == plantId.plantId)
     console.log(selectedPlant)
-    // if (selectedPlant) { 
+    // if (selectedPlant.comments) { 
     //     commentsHtml = selectedPlant.comments.map((comment, index) => {
     //         return (
     //         <CommentCard
