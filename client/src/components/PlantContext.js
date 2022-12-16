@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 const PlantContext = React.createContext();
 
@@ -7,7 +7,7 @@ function PlantContextProvider(props) {
 
     const [authToken, setAuthToken] = useState('');
     const [searchParams, setSearchParams] = useState({})
-    const [searchQuery, setSearchQuery] = useState("")
+    // const [searchQuery, setSearchQuery] = useState("")
 
     const [collection, setCollection] = useState([]);
     const [selectedPlant, setSelectedPlant] = useState();
@@ -26,11 +26,14 @@ function PlantContextProvider(props) {
            .then(res => setCollection(res.data.data))
            .catch(error => console.log(error));
     }
-    function getOne() {
-        axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants${searchParams.search === "" ? '?' : `/search?q=${searchParams.search}&`}token=yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o`)
-            .then(res => setCollection(res.data.data))
-            .catch(error => console.log(error));
-    }
+    const getOne = useCallback(
+        () => {
+            axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants${searchParams.search === "" ? '?' : `/search?q=${searchParams.search}&`}token=yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o`)
+                .then(res => setCollection(res.data.data))
+                .catch(error => console.log(error));
+        }, 
+        [searchParams.search] // Dependencies
+    )
 
     /* Currently unusable? Auth token is not accepted by trefle. */
     useEffect(() => {
@@ -69,7 +72,7 @@ function PlantContextProvider(props) {
 
     useEffect(() => {
         getOne();
-    }, [searchParams]);
+    }, [searchParams, getOne]);
 
 
     return (
