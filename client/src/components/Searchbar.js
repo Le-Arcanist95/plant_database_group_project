@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
-import {PlantContext} from "./PlantContext.js"
+import { PlantContext } from "./PlantContext.js";
 import "./styles/searchbar.css";
 
 export default function Searchbar(props) {
-    const [inputValue, setInputValue] = useState({ 
-        search : "",
-        
-    });
-    const {setSearchParams} = useContext(PlantContext)
+    const [inputValue, setInputValue] = useState({
+        search: "",
 
+    });
+
+    const {setSearchParams} = useContext(PlantContext)
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -19,10 +19,11 @@ export default function Searchbar(props) {
         } 
 
 
+
     // const handleSubmit = () => props.handleSubmit(inputValue);
     const handleSubmit = () => {
-        console.log("queried!")
-        setSearchParams(inputValue)
+        // console.log("queried!");
+        setSearchParams(inputValue);
     };
 
     return (

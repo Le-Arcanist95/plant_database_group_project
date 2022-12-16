@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { PlantContext } from "../components/PlantContext";
 import "./styles/homepage.css";
 import PlantCard from "../components/PlantCard";
@@ -8,19 +8,20 @@ import Loader from "../components/Loader";
 
 export default function Homepage() {
     const { collection, setParams } = useContext(PlantContext);
-    console.log(collection)
+    // console.log(collection);
 
-    let collectionHtml
-    if (collection.length > 1) {
+    let collectionHtml;
+    if (collection.length > 0) {
         collectionHtml = collection.map(plant => {
-        return ( 
-            <PlantCard
-                key={plant.id}
-                id={plant.id}
-                {...plant}
-            />
-            )
-        })} else if (collection) ;
+            return (
+                <PlantCard
+                    key={plant.id}
+                    id={plant.id}
+                    {...plant}
+                />
+            );
+        });
+    } else if (collection);
 
     return (
         <div className="homepage-container">
