@@ -19,11 +19,11 @@ function PlantContextProvider(props) {
     const max = 3
     const queryString = ""
 
-    // function getAll() {
-    //    axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag${queryString}`)
-    //        .then(res => setCollection(res.data.data))
-    //        .catch(error => console.log(error));
-    // }
+    function getAll() {
+       axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag${queryString}`)
+           .then(res => setCollection(res.data.data))
+           .catch(error => console.log(error));
+    }
 
 
     /* Currently unusable? Auth token is not accepted by trefle. */
@@ -59,6 +59,7 @@ function PlantContextProvider(props) {
         }
         getAll();
     }, [authToken]);
+
 
     return (
         <PlantContext.Provider value={{
