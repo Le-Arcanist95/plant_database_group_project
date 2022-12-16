@@ -3,13 +3,13 @@ import React from "react"
 export default function CommentCard(props) {
     //deconstruct the props handed down from Plant Card - 
     // we may want to use context here?
-    const {userName, userId, id, comment, date, time} = props
-
+    const {userName, userId, id, comment, timeStamp} = props
+    
     //return all comments the selected plant
     return (
         <>
-            <h1>{userName}: </h1><span>{date}, {time}</span>
-            <p>{comment}</p>
+            <h1>{userName? userName : "There is no userName"} </h1><span>{timeStamp? "timeStamp" : "There is no timeStamp"} </span>
+            <p>{comment? comment : ""}</p>
             {/* if the userId is the same as the id for the comment
             {props.userId === id ? 
             // render this 
