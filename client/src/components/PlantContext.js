@@ -7,6 +7,7 @@ function PlantContextProvider(props) {
 
     const [authToken, setAuthToken] = useState('');
     const [collection, setCollection] = useState([]);
+    const [selectedPlant, setSelectedPlant] = useState()
     const [newComment, setNewComment] = useState({});
 
     function addNewComment(plantId) {
@@ -26,25 +27,22 @@ function PlantContextProvider(props) {
 
 
     /* Currently unusable? Auth token is not accepted by trefle. */
-    // useEffect(() => {
-    //     // Request authToken from server-side
-    //     const getAuthToken = async () => {
-    //         axios.get('/auth')
-    //             .then(res => setAuthToken(res.data.token))
-    //             .catch(err => console.log(err));
-    //     };
-    //     getAuthToken();
+    useEffect(() => {
+        // Request authToken from server-side
+        const getAuthToken = async () => {
+            axios.get('/auth')
+                .then(res => setAuthToken(res.data.token))
+                .catch(err => console.log(err));
+        };
+        getAuthToken();
+    },[]);
 
-    // },[]);
-
-
-    
-    // Condition true if string is not empty
+    // // Condition true if string is not empty
     // if(authToken) { getAll()};
     // useEffect(() => {
-        // Condition true if string is not empty
-        // if(authToken) { getAll()};
-   //     }
+    //     // Condition true if string is not empty
+    //     if(authToken) { getAll()};
+    //    })
     
    useEffect(() => {
         function getAll() { 
@@ -56,18 +54,21 @@ function PlantContextProvider(props) {
                     token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
                 },
             })
-            .then(res => console.log(res))
+            .then(res => setCollection(res.data.data))
             .catch(error => console.log(error))
         }
-        // getAll();
-    }, []);
+        getAll();
+    }, [authToken]);
+
 
     return (
         <PlantContext.Provider value={{
             collection: collection,
             newComment: newComment,
             setNewComment: setNewComment,
-            addNewComment: addNewComment
+            addNewComment: addNewComment,
+            selectedPlant: selectedPlant,
+            setSelectedPlant: setSelectedPlant
         }}>
             {props.children}
         </PlantContext.Provider>

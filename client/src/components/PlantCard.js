@@ -1,26 +1,23 @@
 import React from "react";
-import CommentCard from "./CommentCard";
-import CommentForm from "./CommentForm";
+import { Link } from "react-router-dom";
+import { PlantContext } from "./PlantContext";
 import "./styles/plantCard.css";
 
 export default function PlantCard(props) {
-    // const commentsHtml = props.comments.map((comment) => {
-    //     return (<CommentCard
-    //         {...props}
-    //         key={comment.id}
-    //     />);
-    // });
+    const {setSelectedPlant} = React.useContext(PlantContext)
+    console.log(props)
+    function setSelection(event) {
+        setSelectedPlant(props)
+    }
+    
     return (
         <div className="plant-card-container">
-            <section>
-            </section>
-            {/* {commentsHtml} */}
+            <section onClick={setSelection}>
+            <Link to={`/plant/${props.id}`}>
             <img src={props.image_url} alt="plant" />
             <p>{props.common_name}</p>
-            {/* {commentsHtml}
-            <CommentForm
-                id={props.id}
-            /> */}
+            </Link>
+            </section> 
         </div>
     );
 };

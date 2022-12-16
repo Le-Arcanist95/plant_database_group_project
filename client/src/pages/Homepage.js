@@ -8,11 +8,17 @@ import Loader from "../components/Loader";
 
 export default function Homepage() {
     const { collection } = useContext(PlantContext);
+    console.log(collection)
 
-    const collectionHtml = collection.map(plant => (<PlantCard
-        key={plant.id}
-        {...plant}
-    />));
+    const collectionHtml = collection.map(plant => {
+        return ( 
+            <PlantCard
+                key={plant.id}
+                id={plant.id}
+                {...plant}
+            />
+            )
+        });
 
     return (
         <div className="homepage-container">
