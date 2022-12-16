@@ -7,15 +7,17 @@ export default function Searchbar(props) {
         search: "",
 
     });
-    const { setSearchParams, setOtherParams } = useContext(PlantContext);
+
+    const {setSearchParams} = useContext(PlantContext)
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setInputValue({
-            [name]: value
-        });
+        const {name, value} = e.target
+            setInputValue({
+                [name]: value
+            })
+            
+        } 
 
-    };
 
 
     // const handleSubmit = () => props.handleSubmit(inputValue);
@@ -28,9 +30,6 @@ export default function Searchbar(props) {
         <>
             <div className="searchbar-wrapper">
                 <input type="search" name="search" value={inputValue.search} onChange={handleChange} />
-                {/* <select>
-                    <option></option>
-                </select> */}
                 <button onClick={handleSubmit}>
                     <i className="bi bi-search"></i>
                     Search
