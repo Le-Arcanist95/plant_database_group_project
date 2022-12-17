@@ -3,7 +3,8 @@ import React from "react"
 export default function CommentCard(props) {
     //deconstruct the props handed down from Plant Card - 
     // we may want to use context here?
-    const {userName, userId, id, comment, timeStamp} = props
+    // Still needs userId for ID matching in edit/delete functionality
+    const {userName, comment, timeStamp} = props
     
     //return all comments the selected plant
     return (
