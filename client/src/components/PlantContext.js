@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 const PlantContext = React.createContext();
-
+const trefleClient = axios.create({
+    baseURL: 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/',
+    params: {
+        token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
+    }
+})
 
 function PlantContextProvider(props) {
 
     const [authToken, setAuthToken] = useState('');
     const [searchParams, setSearchParams] = useState({})
-    const [searchQuery, setSearchQuery] = useState("")
+    // const [searchQuery, setSearchQuery] = useState("")
 
     const [collection, setCollection] = useState([]);
     const [selectedPlant, setSelectedPlant] = useState();
@@ -17,20 +22,25 @@ function PlantContextProvider(props) {
         axios.put('');
     }
 
-    const min = 1
-    const max = 3
+    // const min = 1
+    // const max = 3
     console.log(searchParams)
 
     function getAll() {
-       axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/species?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag`)
+        trefleClient.get(`species`)
            .then(res => setCollection(res.data.data))
            .catch(error => console.log(error));
     }
-    function getOne() {
-        axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants${searchParams.search === "" ? '?' : `/search?q=${searchParams.search}&`}token=yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o`)
-            .then(res => setCollection(res.data.data))
-            .catch(error => console.log(error));
-    }
+    // Memoized response from getOne with a useCallback custom hook.
+    const getOne = useCallback(
+        async () => {
+
+            const response = await trefleClient.get(`plants${searchParams.search === "" ? '?' : `/search?q=${searchParams.search}&`}`)    
+            .catch((error) => console.log(error));
+            return setCollection(response.data.data);
+        },
+        [searchParams.search]
+    )
 
     /* Currently unusable? Auth token is not accepted by trefle. */
     useEffect(() => {
@@ -51,7 +61,6 @@ function PlantContextProvider(props) {
     //    })
 
     // function getAll() { 
-    //     const api = `https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants${`/${searchParams}`}`
     //     console.log(api)
     //     axios({
     //         method: 'get',
@@ -69,7 +78,7 @@ function PlantContextProvider(props) {
 
     useEffect(() => {
         getOne();
-    }, [searchParams]);
+    }, [searchParams, getOne]);
 
 
     return (
