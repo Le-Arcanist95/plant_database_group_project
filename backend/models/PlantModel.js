@@ -1,11 +1,10 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema 
-const { CommentSchema } = require("./CommentModel")
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const plantSchema = new Schema ({
+const plantSchema = new Schema({
     comments: {
-            type: Schema.Types.ObjectId,
-            ref: "CommentModel"
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
     },
     liked: Number,
     api_slug: {
@@ -13,10 +12,10 @@ const plantSchema = new Schema ({
         required: true,
     },
     api_id: {
-        type: Number, 
+        type: Number,
         required: true,
     }
-})
+});
 
 
-module.exports = mongoose.model("Plant", plantSchema)
+module.exports = mongoose.model("Plant", plantSchema);
