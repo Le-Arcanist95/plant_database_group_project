@@ -41,6 +41,7 @@ function PlantContextProvider(props) {
         },
         [searchParams.search]
     )
+    
 
     /* Currently unusable? Auth token is not accepted by trefle. */
     useEffect(() => {

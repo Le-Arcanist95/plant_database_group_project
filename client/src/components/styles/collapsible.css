@@ -1,0 +1,17 @@
+.collapsible {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+    transition: height 0.3s ease-in-out;
+}
+.collapsible-header {
+    display: flex;
+    justify-content: space-between;
+}
+.collapsible-content {
+    padding: 0 1rem;
+    background: #f1f1f1;
+}

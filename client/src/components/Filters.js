@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
-import {PlantContext} from "./PlantContext.js"
+import Collapsible from "./Collapsible.js";
+import {PlantContext} from "./PlantContext.js";
 import "./styles/searchbar.css";
 
 export default function Filters(props) {
@@ -27,30 +28,23 @@ export default function Filters(props) {
         console.log("queried!")
         setSearchParams(inputValue)
     };
-
+    const testOnClick = (e) => {
+        e.preventDefault();
+        console.log("clicked!")
+        
+    }
     return (
         <>
-            <div className="searchbar-wrapper">
-                { showFilters?
-                <section className="filters-wrapper" >
-                    <h1 onClick={toggleFilters}>{`Filter Results >`}</h1>
-                </section>
-                :
-                <>
-                <h1 onClick={toggleFilters}>{`Hide Filters`}</h1>
-                <section className="filters-wrapper" >
-                    <form className="filters-Form">
-                        <label htmlFor="soil_humidity_min">Minimum Soil Humidity</label>
-                        <input name="soil_humidity_min" type="Number" min="0" max="9" onChange={handleChange} value={searchParams.soil_humidity_min}>
-                        </input>
-                        <label htmlFor="soil_humidity_max">Maximum Soil Humidity</label>
-                        <input name="soil_humidity_max" type="Number" min="1" max="10" onChange={handleChange} value={searchParams.soil_humidity_max}></input>
-                        <button className="bi bi-search" onClick={handleSubmit}></button>
-                    </form>
-                </section>
-                </>
-                }
-            </div>
+            <Collapsible open title="Filters" className="searchbar-wrapper">
+                <main>
+                    <h1 onClick={toggleFilters}>{'Collapse'}</h1>
+                    <section className="filters-wrapper" >
+                        <form className="filters-Form">
+                            <input type='checkbox' name='search' value={inputValue.search} onChange={handleChange} />
+                        </form>
+                    </section>
+                </main>
+            </Collapsible>
         </>
     );
 }
