@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { PlantContext } from "../components/PlantContext";
 import "./styles/homepage.css";
 import PlantCard from "../components/PlantCard";
+import Filters from "../components/Filters"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
@@ -26,7 +27,7 @@ export default function Homepage() {
     return (
         <div className="homepage-container">
             <Header isActive={{ home: true }} />
-
+            <Filters />
             <section className="collection-wrapper">
                 {collection.length > 0 ? collectionHtml : <Loader />}
             </section>

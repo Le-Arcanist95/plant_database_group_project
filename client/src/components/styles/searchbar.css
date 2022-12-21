@@ -6,7 +6,7 @@
 }
 
 
-button{
+.searchbar-wrapper button {
     background-color: var(--green);
     color: white;
     position:absolute;
@@ -17,22 +17,22 @@ button{
     border-bottom-right-radius: 50px;
     padding: .5rem;
     outline: none;
-    border: none
-}
-
-button:hover{
-    background-color: var(--green-shade);
-}
-
-button{
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 3px;
 }
-/* 
+
+
+button:hover{
+    background-color: var(--green-shade);
+}
+
+
 input{
     width: 100%;
+    color: black;
     padding: .5rem;
     border-radius: 50px;
     border: none;
