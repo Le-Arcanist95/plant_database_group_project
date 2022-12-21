@@ -5,7 +5,7 @@ import "./styles/plantCard.css";
 
 export default function PlantCard(props) {
     const {setSelectedPlant} = React.useContext(PlantContext)
-    console.log(props)
+    // console.log(props)
     function setSelection(event) {
         setSelectedPlant({
             ...props
