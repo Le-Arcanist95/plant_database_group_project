@@ -4,14 +4,6 @@ import { getAnimationEnd } from "dom-lib";
 
 const PlantContext = React.createContext();
 
-const trefleClient = axios.create({
-    baseURL: 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/',
-    params: {
-        token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
-    }
-})
-
-
 function PlantContextProvider(props) {
     const [authToken, setAuthToken] = useState('');
     const [searchParams, setSearchParams] = useState({})
@@ -60,34 +52,6 @@ function PlantContextProvider(props) {
     
 
     console.log(searchParams)
-
-  // /*  function getAll() {
-  //      trefleClient.get(`species`)
-  //         .then(res => setCollection(res.data.data))
-  //         .catch(error => console.log(error));
-  //  }
-  //  // Memoized response from getOne with a useCallback custom hook.
-  //  const getOne = useCallback(
-  //      async () => {
-
-  //          const response = await trefleClient.get(`plants${searchParams.search === "" ? '?' : `/search?q=${searchParams.search}&`}`)    
-  //          .catch((error) => console.log(error));
-  //          return setCollection(response.data.data);
-  //      },
-  //      [searchParams.search]
-  //  )
-    
-
-  //   Currently unusable? Auth token is not accepted by trefle. 
-  //  useEffect(() => {
-  //      // Request authToken from server-side
-  //      const getAuthToken = async () => {
-  //          axios.get('/auth')
-  //              .then(res => setAuthToken(res.data.token))
-  //              .catch(err => console.log(err));
-  //      };
-  //      getAuthToken();
-  //   }, []);
 
 // runs filter search results any time searchparams is updated 
     useEffect(() => {

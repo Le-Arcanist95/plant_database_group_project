@@ -11,7 +11,7 @@ export default function Filters(props) {
     // this object holds all of the values selected by the user prior to them hitting submit. 
     const {inputValue, setInputValue} = useContext(InputContext);
     // Search params passed from context - this is where input will be saved when the user clicks submit. 
-    const {setSearchParams, searchParams, filterResults} = useContext(PlantContext)
+    const {setSearchParams, handleChange, filterResults} = useContext(PlantContext)
 
     // boolean to show/unshow filters
     const [showFilters, setShowFilters] = useState(false)
@@ -19,9 +19,9 @@ export default function Filters(props) {
 
 
     // function to collapse/expand filters 
-   // function toggleFilters() {
-    //    setShowFilters(!showFilters)
-   // }
+   function toggleFilters() {
+       setShowFilters(!showFilters)
+   }
 
     // function to set search params when input is changed. 
     function handleSubmit(e) {
@@ -56,7 +56,6 @@ export default function Filters(props) {
     return (
         <>
             <Collapsible open title="Filters" className="searchbar-wrapper">
-                <main>
                     <h1 onClick={toggleFilters}>{'Collapse'}</h1>
                     <section className="filters-wrapper" >
                         <form className="filters-Form">                        
@@ -64,11 +63,9 @@ export default function Filters(props) {
                         <Toggle aria-labelledby="edible" onChange={handleToggle}/>
                         <label id="soil-humidity">{`Water Need (range 1-10):`}</label>
                         <RangeSlider max={10} min={1} defaultValue={[1, 10]} onChange={handleRange} />
-                        <input type='checkbox' name='search' value={inputValue.search} onChange={handleChange} />
                         <button onClick={handleSubmit}>Update Results</button> 
                         </form>
                     </section>
-                </main>
             </Collapsible>
         </>
     );
