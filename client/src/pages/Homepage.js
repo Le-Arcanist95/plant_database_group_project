@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { PlantContext } from "../components/PlantContext";
 import "./styles/homepage.css";
 import PlantCard from "../components/PlantCard";
@@ -8,8 +8,8 @@ import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 
 export default function Homepage() {
-    const { collection, setParams } = useContext(PlantContext);
-    // console.log(collection);
+    const { collection, /* setParams - Why is this here?*/ } = useContext(PlantContext);
+    console.log(collection);
 
     let collectionHtml;
     if (collection.length > 0) {

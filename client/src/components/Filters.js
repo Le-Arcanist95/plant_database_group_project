@@ -3,6 +3,7 @@ import {PlantContext} from "./PlantContext.js"
 import { InputContext } from "./InputContext.js";
 import {RangeSlider, Toggle} from "rsuite"
 import "./styles/filters.css"
+import Collapsible from "./Collapsible.js";
 
 
 export default function Filters(props) {
@@ -18,15 +19,14 @@ export default function Filters(props) {
 
 
     // function to collapse/expand filters 
-    function toggleFilters() {
-        setShowFilters(!showFilters)
-    }
+   // function toggleFilters() {
+    //    setShowFilters(!showFilters)
+   // }
 
     // function to set search params when input is changed. 
     function handleSubmit(e) {
         e.preventDefault()
         setSearchParams(inputValue)
-        console.log(searchParams)
         filterResults()
     }
     //function to update inputValues when the user slides the RangeSlider
@@ -47,36 +47,29 @@ export default function Filters(props) {
                 isEdible: e,
             }
         })
-        console.log(inputValue)
+    };
+    const testOnClick = (e) => {
+        e.preventDefault();
+        console.log("clicked!")
+        
     }
     return (
-            <section className="filters-wrapper" >
-                {/* if show filters is set to false, display the text below.  */}
-                { !showFilters ? 
-                
-                    <h1 onClick={toggleFilters}>{`Filter Results >`}</h1>
-
-                :
-                // if show filters is set to true, display the filters below
-                <>
-                <h1 onClick={toggleFilters}>{`Hide Filters >`}</h1>
-                    <form className="filters-Form">
+        <>
+            <Collapsible open title="Filters" className="searchbar-wrapper">
+                <main>
+                    <h1 onClick={toggleFilters}>{'Collapse'}</h1>
+                    <section className="filters-wrapper" >
+                        <form className="filters-Form">                        
                         <label id="edible">Edible Only: </label>
                         <Toggle aria-labelledby="edible" onChange={handleToggle}/>
-                        <br/>
                         <label id="soil-humidity">{`Water Need (range 1-10):`}</label>
                         <RangeSlider max={10} min={1} defaultValue={[1, 10]} onChange={handleRange} />
-                        {/* // constraint={([start, end]) => start <= 1 && end >= 10} */}
-                        
-                        {/* <label htmlFor="soil_humidity_min">Minimum Soil Humidity</label>
-                        <input name="soil_humidity_min" type="Number" min="0" max="9" onChange={handleChange} value={searchParams.soil_humidity_min}>
-                        </input>
-                        <label htmlFor="soil_humidity_max">Maximum Soil Humidity</label>
-                        <input name="soil_humidity_max" type="Number" min="1" max="10" onChange={handleChange} value={searchParams.soil_humidity_max}></input> */}
-                        <button onClick={handleSubmit}>Update Results</button>    
-                    </form>
-                </>
-                }
-                </section>
+                        <input type='checkbox' name='search' value={inputValue.search} onChange={handleChange} />
+                        <button onClick={handleSubmit}>Update Results</button> 
+                        </form>
+                    </section>
+                </main>
+            </Collapsible>
+        </>
     );
 }

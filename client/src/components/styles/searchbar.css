@@ -24,9 +24,11 @@
     gap: 3px;
 }
 
+
 button:hover{
     background-color: var(--green-shade);
 }
+
 
 input{
     width: 100%;
@@ -44,4 +46,4 @@ input{
     input{
         padding: .8rem;
     }
-}
+} */

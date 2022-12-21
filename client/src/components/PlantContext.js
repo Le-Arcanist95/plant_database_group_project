@@ -1,10 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import { getAnimationEnd } from "dom-lib";
+
 const PlantContext = React.createContext();
 
-function PlantContextProvider(props) {
+const trefleClient = axios.create({
+    baseURL: 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/',
+    params: {
+        token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
+    }
+})
 
+
+function PlantContextProvider(props) {
     const [authToken, setAuthToken] = useState('');
     const [searchParams, setSearchParams] = useState({})
     const [searchQuery, setSearchQuery] = useState("?")
@@ -18,6 +26,7 @@ function PlantContextProvider(props) {
         // axios.put('');
     }
 
+// Goes through searchParams and sets the search query and string automatically based on the input. 
     function filterResults() {
         console.log(searchParams)
         // if search is undefined, set it to ? (this is for the api call)
@@ -42,35 +51,56 @@ function PlantContextProvider(props) {
         console.log(searchFilters)
         console.log(searchQuery)
     }
-    
-
-    // General call to the api to pull all plants
-    // function getAll() {
-    //    axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/species?token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag`)
-    //        .then(res => setCollection(res.data.data))
-    //        .catch(error => console.log(error));
-    // }  
+     
     function getSome() {
        axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/species${searchQuery}token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag${searchFilters}`)
            .then(res => setCollection(res.data.data))
            .catch(error => console.log(error));
     }  
     
-    // run the get request any time there is a change the search query or filters
-    // useEffect(() => {
-    //     console.log(collection)
-    //     if (isMounted.current) {
-    //         getAll();
-    //     }
-    // }, []);
+
+    console.log(searchParams)
+
+  // /*  function getAll() {
+  //      trefleClient.get(`species`)
+  //         .then(res => setCollection(res.data.data))
+  //         .catch(error => console.log(error));
+  //  }
+  //  // Memoized response from getOne with a useCallback custom hook.
+  //  const getOne = useCallback(
+  //      async () => {
+
+  //          const response = await trefleClient.get(`plants${searchParams.search === "" ? '?' : `/search?q=${searchParams.search}&`}`)    
+  //          .catch((error) => console.log(error));
+  //          return setCollection(response.data.data);
+  //      },
+  //      [searchParams.search]
+  //  )
+    
+
+  //   Currently unusable? Auth token is not accepted by trefle. 
+  //  useEffect(() => {
+  //      // Request authToken from server-side
+  //      const getAuthToken = async () => {
+  //          axios.get('/auth')
+  //              .then(res => setAuthToken(res.data.token))
+  //              .catch(err => console.log(err));
+  //      };
+  //      getAuthToken();
+  //   }, []);
+
+// runs filter search results any time searchparams is updated 
     useEffect(() => {
         filterResults()
     }, [searchParams])
+    
+// runs getSome call to the api when the filter or query strings are updated. 
     useEffect(() => {
         if (isMounted.current) {
             getSome()
         } else {isMounted.current = true}    
     }, [searchFilters, searchQuery])
+
 
     console.log(collection)
 
@@ -95,7 +125,25 @@ function PlantContextProvider(props) {
 export { PlantContextProvider, PlantContext };
 
 
+    // // Condition true if string is not empty
+    // if(authToken) { getAll()};
+    // useEffect(() => {
+    //     // Condition true if string is not empty
+    //     if(authToken) { getAll()};
+    //    })
 
+    // function getAll() { 
+    //     console.log(api)
+    //     axios({
+    //         method: 'get',
+    //         url: api,
+    //         params: {
+    //             token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
+    //         },
+    //     })
+    //     .then(res => setCollection(res.data.data))
+    //     .catch(error => console.log(error))
+    // }
 /* Currently unusable? Auth token is not accepted by trefle. */
 // useEffect(() => {
 //     // Request authToken from server-side
