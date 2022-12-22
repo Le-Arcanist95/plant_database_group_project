@@ -1,6 +1,9 @@
+// Import Dependencies
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 const PlantContext = React.createContext();
+
+// Create axios instance and pass through token
 const trefleClient = axios.create({
     baseURL: 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/',
     params: {
@@ -8,8 +11,9 @@ const trefleClient = axios.create({
     }
 })
 
+// PlantContextProvider component
 function PlantContextProvider(props) {
-
+    // State
     const [authToken, setAuthToken] = useState('');
     const [searchParams, setSearchParams] = useState({})
     // const [searchQuery, setSearchQuery] = useState("")
@@ -26,11 +30,13 @@ function PlantContextProvider(props) {
     // const max = 3
     console.log(searchParams)
 
+    // Get all plants
     function getAll() {
         trefleClient.get(`species`)
            .then(res => setCollection(res.data.data))
            .catch(error => console.log(error));
     }
+
     // Memoized response from getOne with a useCallback custom hook.
     const getOne = useCallback(
         async () => {
@@ -73,15 +79,16 @@ function PlantContextProvider(props) {
     //     .then(res => setCollection(res.data.data))
     //     .catch(error => console.log(error))
     // }
+    
     useEffect(() => {
         getAll();
     }, [authToken]);
-
+    
     useEffect(() => {
         getOne();
     }, [searchParams, getOne]);
 
-
+    // Render PlantContextProvider
     return (
         <PlantContext.Provider value={{
             collection: collection,
@@ -98,5 +105,5 @@ function PlantContextProvider(props) {
     );
 }
 
-
+// Export PlantContextProvider and PlantContext
 export { PlantContextProvider, PlantContext };

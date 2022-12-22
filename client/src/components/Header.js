@@ -1,3 +1,4 @@
+// Purpose: Header component for the app
 import React from "react";
 import { Link } from "react-router-dom";
 import Searchbar from "./Searchbar";
@@ -5,10 +6,9 @@ import Filters from "./Filters"
 import "./styles/header.css";
 
 
-// TODO: on window load animate logo in
-
+// TODO: on window load animate logo in 
 export default function Header({ isActive }) {
-
+    // Render Header
     return (
         <header className="header-container">
             <nav>
