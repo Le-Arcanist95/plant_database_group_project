@@ -2,7 +2,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Searchbar from "./Searchbar";
-import Filters from "./Filters"
 import "./styles/header.css";
 
 
@@ -19,7 +18,6 @@ export default function Header({ isActive }) {
             {/* HERO */}
             <section className="hero">
                 <span className="logo">PlantProject</span>
-                <Filters />
                 <Searchbar />
             </section>
 
