@@ -59,6 +59,7 @@ function PlantContextProvider(props) {
 // runs getSome call to the api when the filter or query strings are updated. 
     useEffect(() => {
         if (isMounted.current) {
+            // Purpose: Makes the api call to get the plants based on the search query and filters (renamed as GetPlants for clarity)
             const getPlants = () => {
                 trefleClient.get(`species${searchQuery}${searchFilters}`)
                     .then(res => setCollection(res.data.data))
@@ -90,54 +91,3 @@ function PlantContextProvider(props) {
 
 export { PlantContextProvider, PlantContext };
 
-
-    // // Condition true if string is not empty
-    // if(authToken) { getAll()};
-    // useEffect(() => {
-    //     // Condition true if string is not empty
-    //     if(authToken) { getAll()};
-    //    })
-
-    // function getAll() { 
-    //     console.log(api)
-    //     axios({
-    //         method: 'get',
-    //         url: api,
-    //         params: {
-    //             token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
-    //         },
-    //     })
-    //     .then(res => setCollection(res.data.data))
-    //     .catch(error => console.log(error))
-    // }
-/* Currently unusable? Auth token is not accepted by trefle. */
-// useEffect(() => {
-//     // Request authToken from server-side
-//     const getAuthToken = async () => {
-//         axios.get('/auth')
-//             .then(res => setAuthToken(res.data.token))
-//             .catch(err => console.log(err));
-//     };
-//     getAuthToken();
-// }, []);
-
-// // Condition true if string is not empty
-// if(authToken) { getAll()};
-// useEffect(() => {
-//     // Condition true if string is not empty
-//     if(authToken) { getAll()};
-//    })
-
-// function getAll() { 
-//     const api = `https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants${`/${searchParams}`}`
-//     console.log(api)
-//     axios({
-//         method: 'get',
-//         url: api,
-//         params: {
-//             token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
-//         },
-//     })
-//     .then(res => setCollection(res.data.data))
-//     .catch(error => console.log(error))
-// }
