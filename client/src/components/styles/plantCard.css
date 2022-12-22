@@ -3,9 +3,34 @@
     height: 200px;
     border: 2px solid var(--green);
     border-radius: 5px;
+    overflow: hidden;
+}
+
+.img-container{
+    overflow: hidden;
 }
 
 .plant-card-container img{
-    width: 50px;
     object-fit: cover;
+    object-position: center;
+    height: 100px;
+    width: 100%;
+    transition: 0.5s all ease-in-out;
+}
+
+.plant-card-container:hover img{
+    transform: scale(1.2);
+}
+
+.plant-card-container p{
+    line-height: 80px;
+    text-align: center;
+}
+
+.plant-card-container:hover a{
+    text-decoration: none;
+}
+
+.plant-card-container:hover{
+    outline: 2px;
 }
