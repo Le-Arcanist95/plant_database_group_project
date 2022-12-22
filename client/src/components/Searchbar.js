@@ -1,12 +1,16 @@
+// Purpose: Searchbar component for the Plant Database app
 import React, { useState, useContext } from "react";
 import { PlantContext } from "./PlantContext.js";
 import { InputContext } from "./InputContext.js";
 import "./styles/searchbar.css";
 
+// Searchbar component
 export default function Searchbar(props) {
+    // Context
     const { setInputValue, inputValue } = useContext(InputContext)
     const {setSearchParams, filterResults} = useContext(PlantContext)
 
+    // Handle change
     const handleChange = (e) => {
         const {name, value} = e.target
             setInputValue(prev => ({
@@ -18,7 +22,8 @@ export default function Searchbar(props) {
 
 
 
-    // const handleSubmit = () => props.handleSubmit(inputValue);
+    // Revision? -- const handleSubmit = () => props.handleSubmit(inputValue);
+    // Handle submit
     function handleSubmit(e) {
         e.preventDefault()
         // console.log("queried!");
@@ -26,6 +31,7 @@ export default function Searchbar(props) {
         filterResults()
     };
 
+    // Render Searchbar
     return (
         <>
             <div className="searchbar-wrapper">
@@ -37,4 +43,4 @@ export default function Searchbar(props) {
             </div>
         </>
     );
-}
+};

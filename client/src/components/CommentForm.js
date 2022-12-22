@@ -1,7 +1,9 @@
+// Import dependencies
 import React from "react"
 import { PlantContext } from "./PlantContext"
 import { InputContext } from "./InputContext"
 
+// CommentForm component
 export default function CommentForm() {
     // useContext connects the sheet to be able to read and change comments
     const { setNewComment, addNewComment } = React.useContext(PlantContext)
@@ -20,7 +22,8 @@ export default function CommentForm() {
     function handleChange(event) {
         setUserInput(event.target.value)
     }
-    //function
+
+    // Handle submit
     function handleSubmit(event) {
         setNewComment(userInput)
         addNewComment(
@@ -28,6 +31,8 @@ export default function CommentForm() {
         )
 
     }
+
+    // Render CommentForm
     return (
         <>
             <form>
@@ -37,4 +42,4 @@ export default function CommentForm() {
             </form>
         </>
     )
-}
+};

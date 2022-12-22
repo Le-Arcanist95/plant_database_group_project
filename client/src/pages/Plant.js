@@ -4,17 +4,20 @@ import { PlantContext } from "../components/PlantContext";
 import CommentCard from "../components/CommentCard";
 import CommentForm from "../components/CommentForm";
 
-let commentsHtml
 export default function Plant(props) {
+    // Grab plantId from URL
     const plantId = useParams()
+    
+    // Context  
+    const {collection} = React.useContext(PlantContext);
+    
+    // Changed to const. It's not being reassigned.
+    const selectedPlant = collection.find(plant => plant.id === plantId.plantId)
 
+    // console.log(plantId.plantId)
+    // console.log(collection)
+    // console.log(selectedPlant)
 
-
-    console.log(plantId.plantId)
-    const {collection} = React.useContext(PlantContext)
-    console.log(collection)
-    let selectedPlant = collection.find(plant => plant.id == plantId.plantId)
-    console.log(selectedPlant)
     let comments = [
         {
             comment: "comment",
@@ -29,23 +32,23 @@ export default function Plant(props) {
             plantId: {plantId}
         }
     ]
-    if (comments) { 
-    commentsHtml = comments.map((comment, index) => {
+    // Updated to use ternary operator
+    const commentsHtml = comments ? comments.map((comment, index) => {
             return (
             <CommentCard               
                 key={index}
                 {...comment}
             />);
-        });
-    }
+        }) : "";
 
     return (
         <div className="plantpage-container">
             <h1>{selectedPlant.common_name}</h1>
             <h2>{selectedPlant.scientific_name}</h2>
-            <img src={selectedPlant.image_url} alt={`image of ${selectedPlant.common_name}`}/>            
+            {/* Changed alt attribute. Screen reader will explain "Image of" */}
+            <img src={selectedPlant.image_url} alt={`a ${selectedPlant.common_name}`}/>            
             
-            {commentsHtml ? commentsHtml : ""}
+            {commentsHtml ? commentsHtml : "No comments yet!"}
             <CommentForm />
         </div>
     );

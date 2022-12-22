@@ -1,11 +1,20 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { getAnimationEnd } from "dom-lib";
+// import { getAnimationEnd } from "dom-lib"; -- Why is this here?
 
 const PlantContext = React.createContext();
 
+// Create axios instance and pass through token
+const trefleClient = axios.create({
+    baseURL: 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/',
+    params: {
+        token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
+    }
+})
+
+// PlantContextProvider component
 function PlantContextProvider(props) {
-    const [authToken, setAuthToken] = useState('');
+    // const [authToken, setAuthToken] = useState('');
     const [searchParams, setSearchParams] = useState({})
     const [searchQuery, setSearchQuery] = useState("?")
     const [searchFilters, setSearchFilters] = useState("")
@@ -26,7 +35,7 @@ function PlantContextProvider(props) {
             setSearchQuery("?")
         }
         // if the search is anything other than the ?  or an empty string, set the search query
-        else if (searchParams.search != "?" && searchParams.search != "") {
+        else if (searchParams.search !== "?" && searchParams.search !== "") {
             setSearchQuery(`/search?q=${searchParams.search}&`)
         } 
         // if the user has selected a minimum or maximum soil humidity, add the range below
@@ -45,7 +54,7 @@ function PlantContextProvider(props) {
     }
      
     function getSome() {
-       axios.get(`https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/species${searchQuery}token=NPVR8QAoQfkS6ZMQbksVWHktk-nsOvhQ4D0Ifa4_6Ag${searchFilters}`)
+       trefleClient.get(`species${searchQuery}${searchFilters}`)
            .then(res => setCollection(res.data.data))
            .catch(error => console.log(error));
     }  
