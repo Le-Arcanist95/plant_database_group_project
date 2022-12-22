@@ -4,6 +4,7 @@
     border: 2px solid var(--green);
     border-radius: 5px;
     overflow: hidden;
+    margin: 5px;
 }
 
 .img-container{

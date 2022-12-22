@@ -1,31 +1,49 @@
 header{
     color: white;
-    height: 70vh;
+    height: 60vh;
     background-image: url(../../assets/vadim-kaipov-8ZELrodSvTc-unsplash.jpg);
     background-position: center;
     object-fit: cover;
 
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 nav{
     backdrop-filter: blur(10px);
     position: absolute;
+    top: 0;
     width: 100%;
     display: flex;
     justify-content: end;
+    padding-block: 1rem;
 }
 
 nav .link{
-    padding: .5rem;
+    margin-inline: 1rem;
     cursor: pointer;
     width: fit-content;
     color: white;
     text-decoration: none;
+    position: relative;
 }
 
-nav .link:hover{
-    color: var(--white-shade);
+nav .link::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    background-color: var(--creme);
+    width: 0;
+    transition: all 300ms;
+}
+
+nav .link:hover::before{
+    width: 100%;
 }
 
 nav .link.active{
@@ -33,7 +51,6 @@ nav .link.active{
 }
 
 .hero{
-    padding-top: 5vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -73,5 +90,13 @@ nav .link.active{
 @media screen and (min-width: 500px) {
     .logo{
         font-size: 4rem;
+    }
+
+    nav .link{
+        font-size: 1.3rem;
+    }
+
+    header{
+        height: 70vh;;
     }
 }
