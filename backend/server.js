@@ -1,9 +1,39 @@
 // Import required modules and file
+require('dotenv').config();
 const express = require("express");
-const morgan = require("morgan");
-const mongoose = require("mongoose");
 const app = express();
+const morgan = require("morgan");
+const cors = require('cors');
+const corsOptions = require('./config/corsOptions');
+const verifyJWT = require('./middleware/verifyJWT');
+const cookieParser = require('cookie-parser');
+const credentials = require('./middleware/credentials');
+const mongoose = require("mongoose");
+const connectDB = require('./config/dbConnection');
+const PORT = process.env.PORT || 3500;
 
+// Connect to MongoDB Database
+connectDB();
+
+// Handle options credentials check for CORS and fetch cookies credentials requirement
+app.use(credentials);
+
+// Cross Origin Resource Sharing
+app.use(cors(corsOptions));
+
+// Middleware for handling urlencoded data
+app.use(express.urlencoded({ extended: false }));
+
+// Middleware for handling json data
+app.use(express.json());
+
+// Middleware for handling cookies
+app.use(cookieParser());
+
+// Middleware for logging requests
+app.use(morgan('dev'));
+
+// Trefle API
 const params = {  
     origin: 'http://localhost:3000/',  
     ip: '127.0.0.1',  
@@ -25,22 +55,30 @@ app.get('/auth', async (req, res) => {
     res.send(authToken);
 });
 
-
-// Middleware for every request
-app.use(express.json()); // Used to parse the req.body into json.
-app.use(morgan('dev')); // Logs requests to the console
-
-
-// Database Connection
-const uri = "mongodb+srv://Lev_Arcanist:" + encodeURIComponent("p!=Mb6S&B(XBX,b[5S#ea") + "@cluster0.jd6rnhp.mongodb.net/?retryWrites=true&w=majority"
-mongoose.set('strictQuery', false);
-mongoose.connect(uri, () => console.log("Successfully connected to the database."));
-
-// Request and save data from TrefleAPI
-
-
 // Routes
+app.use('/register', require('./routes/registerRouter'));
+app.use('/auth', require('./routes/authRouter'));
+app.use('/refresh', require('./routes/refreshRouter'));
+app.use('/logout', require('./routes/logoutRouter'));
 app.use('/plants', require('./routes/plantRouter'));
+
+// Middleware for verifying JWT (All routes after must pass through authentication)
+app.use(verifyJWT);
+
+// Routes -- Protected
+app.use('/users', require('./routes/api/userRouter'));
+
+// 404 Handler
+app.all('*', (req, res) => {
+    res.status(404);
+    if (req.accepts('html')) {
+        res.sendFile(path.join(__dirname, '..', 'client', 'public', '404.html'));
+    } else if (req.accepts('json')) {
+        res.json({ error: '404 Not found' });
+    } else {
+        res.type('txt').send('404 Not found');
+    }
+});
 
 // Error Handler
 app.use((err, req, res, next) => {
@@ -49,8 +87,8 @@ app.use((err, req, res, next) => {
 });
 
 
-// Port and Listen
-const port = process.env.PORT || 9000;
-app.listen(port, () => {
-    console.log(`The server is live and listening for requests on port #${port}`);
+// Listen
+mongoose.connection.once('open', () => {
+    console.log('Connected to MongoDB');
+    app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 });
