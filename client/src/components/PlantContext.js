@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { getAnimationEnd } from "dom-lib";
+// import { getAnimationEnd } from "dom-lib"; -- Why is this here?
 
 const PlantContext = React.createContext();
 

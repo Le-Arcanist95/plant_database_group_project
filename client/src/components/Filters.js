@@ -1,6 +1,6 @@
 // Purpose: To create a collapsible filter menu for the user to select from
 // Import dependencies
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import {PlantContext} from "./PlantContext.js"
 import { InputContext } from "./InputContext.js";
 import {RangeSlider, Toggle} from "rsuite"
@@ -14,18 +14,9 @@ export default function Filters(props) {
     // State
     // this object holds all of the values selected by the user prior to them hitting submit. 
     const {inputValue, setInputValue} = useContext(InputContext);
+    
     // Search params passed from context - this is where input will be saved when the user clicks submit. 
-    const {setSearchParams, handleChange, filterResults} = useContext(PlantContext)
-
-    // boolean to show/unshow filters
-    const [showFilters, setShowFilters] = useState(false)
-
-
-
-    // function to collapse/expand filters 
-   function toggleFilters() {
-       setShowFilters(!showFilters)
-   }
+    const {setSearchParams, /* handleChange, -- Not being used?*/ filterResults} = useContext(PlantContext)
 
     // function to set search params when input is changed. 
     function handleSubmit(e) {
@@ -53,18 +44,11 @@ export default function Filters(props) {
         })
     };
 
-    // Test onClick - remove later
-    const testOnClick = (e) => {
-        e.preventDefault();
-        console.log("clicked!")
-        
-    }
-
     // Render Filters
     return (
         <>
             <Collapsible open title="Filters" className="searchbar-wrapper">
-                    <h1 onClick={toggleFilters}>{'Collapse'}</h1>
+                    <h1> Collapse </h1>
                     <section className="filters-wrapper" >
                         <form className="filters-Form">                        
                         <label id="edible">Edible Only: </label>
