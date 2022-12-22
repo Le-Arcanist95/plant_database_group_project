@@ -1,7 +1,7 @@
 :root{
     --creme: rgb(255, 250, 235);
     --green: rgb(115, 145, 127);
-    --white-shade: rgb(223, 222, 222);
+    --white-shade: rgb(222, 222, 222);
     --green-shade: rgb(107, 133, 118);
     --primary-font: 'Montserrat', sans-serif;
     --decor-font: 'Unbounded', cursive;
@@ -22,6 +22,6 @@ a{
     color: black;
 }
 
-a:hover{
+/* a:hover{
     color: rgb(78, 78, 78);
-}
+} */

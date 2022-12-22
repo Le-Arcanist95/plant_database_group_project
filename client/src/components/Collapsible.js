@@ -15,10 +15,10 @@ const Collapsible = ({ open = false, children, title }) => {
 
     return (
         <main className="collapsible" style={{ height: height, width: "50%" }}>
-            <header className="collapsible-header" onClick={() => setIsOpen(!isOpen)}>
+            <div className="collapsible-header" onClick={() => setIsOpen(!isOpen)}>
                 <h5> {title} </h5>
                 <FontAwesomeIcon icon={isOpen ? faChevronUp : faChevronDown} />
-            </header>
+            </div>
             <section ref={ref} className="collapsible-content">
                 {isOpen && <section className="collapsible-content">{children}</section>}
             </section>
