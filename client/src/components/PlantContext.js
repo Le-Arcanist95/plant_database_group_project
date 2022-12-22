@@ -59,6 +59,7 @@ function PlantContextProvider(props) {
 // runs getSome call to the api when the filter or query strings are updated. 
     useEffect(() => {
         if (isMounted.current) {
+            // Purpose: Makes the api call to get the plants based on the search query and filters (renamed as GetPlants for clarity)
             const getPlants = () => {
                 trefleClient.get(`species${searchQuery}${searchFilters}`)
                     .then(res => setCollection(res.data.data))
