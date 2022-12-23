@@ -16,7 +16,7 @@ const handleLogin = async (req, res) => {
     if (match) {
         // Returns an array of roles that are true
         const roles = Object.values(foundUser.roles).filter(Boolean);
-
+        
         // Create access token
         const accessToken = jwt.sign(
                 {

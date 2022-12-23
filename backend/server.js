@@ -1,5 +1,7 @@
 // Import required modules and file
 require('dotenv').config();
+const path = require('path');
+const fs = require('fs'); 
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
@@ -10,7 +12,7 @@ const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credentials');
 const mongoose = require("mongoose");
 const connectDB = require('./config/dbConnection');
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT;
 
 // Connect to MongoDB Database
 connectDB();

@@ -16,13 +16,12 @@ export default function Filters(props) {
     const {inputValue, setInputValue} = useContext(InputContext);
     
     // Search params passed from context - this is where input will be saved when the user clicks submit. 
-    const {setSearchParams, /* handleChange, -- Not being used?*/ filterResults} = useContext(PlantContext)
+    const {setSearchParams} = useContext(PlantContext)
 
     // function to set search params when input is changed. 
     function handleSubmit(e) {
         e.preventDefault()
         setSearchParams(inputValue)
-        filterResults()
     }
     //function to update inputValues when the user slides the RangeSlider
     function handleRange(e) {
