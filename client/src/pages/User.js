@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./styles/about.css";
 
-export default function About() {
+export default function User() {
     return (
         <div className="aboutpage-container">
             <Header isActive={{ about: true }} />
