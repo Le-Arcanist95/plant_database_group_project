@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import { trefleClient } from "../api/axios";
 // import { getAnimationEnd } from "dom-lib"; -- Why is this here?
 
 const PlantContext = React.createContext();
@@ -22,12 +22,11 @@ function PlantContextProvider(props) {
     const [selectedPlant, setSelectedPlant] = useState();
     const [newComment, setNewComment] = useState({});
     const isMounted = useRef(false)
+
     // TO DO - this func should take the new comment from the inputContext and add it to our database
     function addNewComment() {
         // axios.put('');
     }
-
-    // IMPORTANT -- Dependency arrays for both our useEffects were not tracking our functions properly. This was the second time I've pulled down code and encountered the error. These are functions that alter state and should either be tracked or moved inside of the effect. The dependency array is meant to track "reactive" variables and our functions directly interact with state which is exactly that. If we are not tracking the functions that modify state then we are not properly tracking the changes to state.filterResults and getPlants have been moved inside of their respective useEffect. If the functions must live outside of useEffect, they should be wrapped in useCallback. It is best practice to use useCallback when passing functions to child components, as well. - Levi
 
     // runs filter search results any time searchparams is updated 
     useEffect(() => {
