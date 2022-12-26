@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { trefleClient } from "../api/axios";
-// import { getAnimationEnd } from "dom-lib"; -- Why is this here?
 
 const PlantContext = React.createContext();
 
