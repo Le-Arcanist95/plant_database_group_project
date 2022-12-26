@@ -91,9 +91,88 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <>
+        {success ? (
+            <section className="register-success">
+                <h2>Registration Successful</h2>
+                <p>Click <a href="/login">here</a> to login.</p>
+            </section>
+        ) : (
+            <section className="register">
+                <p 
+                    ref={errRef} 
+                    className={errMsg ? "errmsg" : "offscreen"}
+                >
+                    {errMsg}
+                </p>
+                <h1> Register </h1>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="username">
+                        Username:
+                        <span className={validName ? "valid" : "hide"}>
+                            <FontAwesomeIcon icon={faCheck} />
+                        </span>
+                        <span className={validName || !user ? "hide" : "invalid"}>
+                            <FontAwesomeIcon icon={faTimes} />
+                        </span>
+                    </label>
+                    <input
+                        type="text"
+                        id="username"
+                        ref={userRef}
+                        autoComplete="off"
+                        onChange={(e) => setUser(e.target.value)}
+                        required
+                        onFocus={() => setUserFocus(true)}
+                        onBlur={() => setUserFocus(false)}
+                    />
 
-        </div>
+                    <label htmlFor="password">
+                        Password:
+                        <span className={validPwd ? "valid" : "hide"}>
+                            <FontAwesomeIcon icon={faCheck} />
+                        </span>
+                        <span className={validPwd || !pwd ? "hide" : "invalid"}>
+                            <FontAwesomeIcon icon={faTimes} />
+                        </span>
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        onChange={(e) => setPwd(e.target.value)}
+                        required
+                        onFocus={() => setPwdFocus(true)}
+                        onBlur={() => setPwdFocus(false)}
+                    />
+
+                    <label htmlFor="confirm_pwd">
+                        Confirm Password:
+                        <span className={validMatch && matchPwd ? "valid" : "hide"}>
+                            <FontAwesomeIcon icon={faCheck} />
+                        </span>
+                        <span className={validMatch || !matchPwd ? "hide" : "invalid"}>
+                            <FontAwesomeIcon icon={faTimes} />
+                        </span>
+                    </label>
+                    <input
+                        type="password"
+                        id="confirm_pwd"
+                        onChange={(e) => setMatchPwd(e.target.value)}
+                        required
+                        onFocus={() => setMatchFocus(true)}
+                        onBlur={() => setMatchFocus(false)}
+                    />
+
+                    <button disabled={!validName || !validPwd || !validMatch ? true : false}> Register </button>
+                </form>
+
+                <p>
+                    Already have an account? <br />
+                    <a href="/login"> Login </a>
+                </p>
+            </section>
+        )}
+    </>
     );
 };
 
