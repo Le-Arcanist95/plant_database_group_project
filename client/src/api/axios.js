@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const serverClient = axios.create({
-    baseURL: 'https://localhost:5000'
+    baseURL: 'https://localhost:1254'
 });
 
 const trefleClient = axios.create({
