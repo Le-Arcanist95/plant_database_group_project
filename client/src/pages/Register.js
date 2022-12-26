@@ -50,11 +50,51 @@ const Register = () => {
         setErrMsg('');
     }, [user, pwd, matchPwd]);
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const v1 = USER_REGEX.test(user);
+        const v2 = PWD_REGEX.test(pwd);
+        const v3 = pwd === matchPwd;
+
+        if (!v1 || !v2 || !v3) {
+            setErrMsg("Invalid Entry");
+            return;
+        }
+
+        try {
+            const response = await serverClient.post(REGISTER_URL, 
+            JSON.stringify({ username: user, password: pwd }),
+            { 
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true 
+            });
+            console.log(response.data);
+            console.log(response.status);
+            console.log(response.accessToken);
+            console.log(JSON.stringify(response));
+            setSuccess(true); setUser(''); setValidName(false); setUserFocus(false); setPwd(''); setValidPwd(false); setPwdFocus(false); setMatchPwd(''); setValidMatch(false); setMatchFocus(false);
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg("No Server Response");
+            } else if (err.response?.status === 500) {
+                setErrMsg("Server Error");
+            } else if (err.response?.status === 409) {
+                setErrMsg("Username Taken");
+            } else if (err.response?.status === 400) {
+                setErrMsg("Invalid Entry");
+            } else {
+                setErrMsg('Registration Failed');
+            };
+            errRef.current.focus();
+        };
+    };
+
     return (
         <div>
-            
+
         </div>
-    )
+    );
 };
 
 export default Register;
