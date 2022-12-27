@@ -1,11 +1,11 @@
 const express = require("express");
-const CommentModel = require("../models/CommentModel.js");
+const Comment = require("../models/Comment.js");
 const commentRouter = express.Router();
 
 
 
 commentRouter.get("/", (req, res, next) => {
-    CommentModel.find((err, results) => {
+    Comment.find((err, results) => {
             if (err) {
                 res.status(400);
                 return next(err);
@@ -15,7 +15,7 @@ commentRouter.get("/", (req, res, next) => {
     });
 
 commentRouter.get("/:commentId", (req, res, next) => {
-    CommentModel.find({_id: req.params._id}, (err, comment) => {
+    Comment.find({_id: req.params._id}, (err, comment) => {
         if (err) {
             res.status(400);
             return next(err)
@@ -24,7 +24,7 @@ commentRouter.get("/:commentId", (req, res, next) => {
     })
 })
 commentRouter.put("/:commentId", (req, res, next) => {
-    CommentModel.findOneAndUpdate(
+    Comment.findOneAndUpdate(
         {_id: req.params._id},
         req.body, 
         {new:true},

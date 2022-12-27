@@ -1,10 +1,10 @@
 const express = require("express");
-const PlantModel = require("../models/PlantModel.js");
+const Plant = require("../models/Plant.js");
 const plantRouter = express.Router();
 
 
 plantRouter.get("/", (req, res, next) => {
-        PlantModel.find((err, results) => {
+        Plant.find((err, results) => {
             if (err) {
                 res.status(400);
                 return next(err);
@@ -14,7 +14,7 @@ plantRouter.get("/", (req, res, next) => {
     });
 
 plantRouter.get("/:plantId", (req, res, next) => {
-    PlantModel.find({_id: req.params._id}, (err, plant) => {
+    Plant.find({_id: req.params._id}, (err, plant) => {
         if (err) {
             res.status(400);
             return next(err)
@@ -23,7 +23,7 @@ plantRouter.get("/:plantId", (req, res, next) => {
     })
 })
 plantRouter.put("/:plantId", (req, res, next) => {
-    PlantModel.findOneAndUpdate(
+    Plant.findOneAndUpdate(
         {_id: req.params._id},
         req.body, 
         {new:true},
