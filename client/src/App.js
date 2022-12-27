@@ -8,7 +8,7 @@ import Homepage from "./pages/Homepage.js";
 import Unauthorized from "./pages/Unauthorized.js";
 import About from "./pages/About.js";
 import Plant from "./pages/Plant.js";
-import User from "./pages/User.js";
+import Profile from "./pages/Profile.js";
 import Missing from "./pages/Missing.js";
 
 
@@ -21,12 +21,12 @@ export default function App() {
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
                 <Route path="about" element={<About />} />
-                <Route path="plant/:plantId" element={<Plant />} />
                 <Route path="unauthorized" element={<Unauthorized />} />
 
                 {/* Private Routes */}
-                <Route element={<RequireAuth />}>
-                    <Route path="user/:userId" element={<User />} />
+                <Route element={<RequireAuth allowedRoles={[2000, 4000, 9000]} />}>
+                    <Route path="profile/:userId" element={<Profile />} />
+                    <Route path="plant/:plantId" element={<Plant />} />
                 </Route>
 
                 {/* Catch-all */}
