@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../context/AuthProvider.js';
-import { serverClient } from '../api/axios.js'
+import React, { useRef, useState, useEffect } from 'react';
+import { serverClient } from '../api/axios.js';
+import useAuth from '../hooks/useAuth.js';
 
 // URL for login request -- outside of component so it doesn't get redefined on every render
 const LOGIN_URL = '/auth';
@@ -8,7 +8,7 @@ const LOGIN_URL = '/auth';
 // Login component
 const Login = () => {
     // Context
-    const { setAuth } = useContext(AuthContext);
+    const { setAuth } = useAuth();
 
     // Refs
     const userRef = useRef();
