@@ -30,13 +30,13 @@ export default function Homepage() {
     // Render Homepage
     return (
         <div className="homepage-container">
-            <Header isActive={{ home: true }} />
+            {/* <Header isActive={{ home: true }} /> */}
             <Filters />
             <section className="collection-wrapper">
                 {collectionHtml}
             </section>
 
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 };
