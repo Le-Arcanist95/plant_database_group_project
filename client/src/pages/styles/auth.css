@@ -1,4 +1,5 @@
-section {
+.register,
+.login {
     width: 100%;
     max-width: 420px;
     min-height: 400px;
@@ -21,8 +22,7 @@ form {
 
 input[type="text"],
 input[type="password"],
-button,
-textarea {
+button {
   font-family: 'Nunito', sans-serif;
   font-size: 22px;
   padding: 0.25rem;
@@ -36,10 +36,6 @@ button {
 
 button {
   padding: 0.5rem;
-}
-
-li {
-    list-style-type: none;
 }
 
 .instructions {

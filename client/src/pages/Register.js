@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { backendClient } from '../api/axios.js';
-import './styles/index.css';
+import './styles/auth.css';
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,24}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -33,15 +33,11 @@ const Register = () => {
 
     useEffect(() => {
         const result = USER_REGEX.test(user);
-        console.log(result);
-        console.log(user);
         setValidName(result);
     }, [user]);
 
     useEffect(() => {
         const result = PWD_REGEX.test(pwd);
-        console.log(result);
-        console.log(pwd);
         setValidPwd(result);
         const match = pwd === matchPwd;
         setValidMatch(match);
@@ -70,10 +66,6 @@ const Register = () => {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true 
             });
-            console.log(response.data);
-            console.log(response.status);
-            console.log(response.accessToken);
-            console.log(JSON.stringify(response));
             setSuccess(true); setUser(''); setValidName(false); setUserFocus(false); setPwd(''); setValidPwd(false); setPwdFocus(false); setMatchPwd(''); setValidMatch(false); setMatchFocus(false);
         } catch (err) {
             if (!err?.response) {

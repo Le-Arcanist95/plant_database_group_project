@@ -4,7 +4,7 @@ import { backendClient } from '../api/axios.js';
 import useAuth from '../hooks/useAuth.js';
 import useInput from '../hooks/useInput.js';
 import useToggle from '../hooks/useToggle.js';
-import './styles/index.css';
+import './styles/auth.css';
 
 // URL for login request -- outside of component so it doesn't get redefined on every render
 const LOGIN_URL = '/auth';
@@ -86,7 +86,7 @@ const Login = () => {
     };
 
     return (
-        <section>
+        <section className='login'>
             {/* Error message display */}
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> 
                 {errMsg} 
