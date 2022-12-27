@@ -1,25 +1,26 @@
 import { useState, useEffect } from 'react';
 
-// Custom hook to get value from localStorage
+// Custom hook to get localStorage value
 const getLocalValue = (key, initialValue) => {
-    // Server-Side Rendering (SSR) check
+    // SSR Check
     if (typeof window === 'undefined') return initialValue;
 
-    // If value is already in localStorage, return it
+    // If key exists in localStorage, return it, otherwise return initialValue
     const localValue = JSON.parse(localStorage.getItem(key));
-    if (localValue) return localValue;
+    if (localValue !== null) return localValue;
 
-    // If value is function, call it and return the result
-    if (initialValue instanceof Function) return initialValue();
-};
+    // If initialValue is a function, call it and return the result
+    if (typeof initialValue === 'function') return initialValue();
 
+    // Otherwise, return initialValue
+    return initialValue;
+}
 // Custom hook to use localStorage
 const useLocalStorage = (key, initialValue) => {
     // State to store value
-    const [value, setValue] = useState(() => {
-        return getLocalValue(key, initialValue); // Get value from localStorage
-    });
+    const [value, setValue] = useState(() => getLocalValue(key, initialValue));
 
+    // Update localStorage when value changes
     useEffect(() => {
         localStorage.setItem(key, JSON.stringify(value));
     }, [key, value]);

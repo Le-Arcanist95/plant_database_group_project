@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { backendClient } from '../api/axios.js';
 import useAuth from '../hooks/useAuth.js';
 import useInput from '../hooks/useInput.js';
@@ -24,7 +24,7 @@ const Login = () => {
     const errRef = useRef();
     
     // State
-    const [user, resetUser, userAttributes] = useInput('user', '');
+    const [user, userReset, userAttributes] = useInput('user', '');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [check, toggleCheck] = useToggle('persist', false);
@@ -61,7 +61,7 @@ const Login = () => {
             setAuth({ user, pwd, roles, accessToken });
 
             // Clear form
-            resetUser();
+            userReset();
             setPwd('');
 
             // Navigate back to redirect location or home
