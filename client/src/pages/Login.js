@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { serverClient } from '../api/axios.js';
 import useAuth from '../hooks/useAuth.js';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 // URL for login request -- outside of component so it doesn't get redefined on every render
 const LOGIN_URL = '/auth';
@@ -10,6 +11,11 @@ const Login = () => {
     // Context
     const { setAuth } = useAuth();
 
+    // Navigation
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
     // Refs
     const userRef = useRef();
     const errRef = useRef();
@@ -18,7 +24,6 @@ const Login = () => {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
 
     // Set focus on user input when page loads
     useEffect(() => {
@@ -55,8 +60,9 @@ const Login = () => {
             setUser('');
             setPwd('');
 
-            // Set success state
-            setSuccess(true);
+            // Navigate back to redirect location or home
+            navigate(from, {replace: true});
+
         } catch (err) {
             // Handle error response
             if (!err?.response) {
