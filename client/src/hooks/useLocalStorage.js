@@ -16,16 +16,16 @@ const getLocalValue = (key, initialValue) => {
 // Custom hook to use localStorage
 const useLocalStorage = (key, initialValue) => {
     // State to store value
-    const [storedValue, setStoredValue] = useState(() => {
+    const [value, setValue] = useState(() => {
         return getLocalValue(key, initialValue); // Get value from localStorage
     });
 
     useEffect(() => {
-        localStorage.setItem(key, JSON.stringify(storedValue));
-    }, [key, storedValue]);
+        localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value]);
     
     // Return a wrapped version of useState's setter function that persists the new value to localStorage
-    return [storedValue, setStoredValue]
+    return [value, setValue]
 };
 
 export default useLocalStorage;

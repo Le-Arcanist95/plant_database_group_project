@@ -2,7 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { serverClient } from '../api/axios.js';
 import useAuth from '../hooks/useAuth.js';
-import useLocalStorage from '../hooks/useLocalStorage.js';
+import useInput from '../hooks/useInput.js';
+import useToggle from '../hooks/useToggle.js';
 
 // URL for login request -- outside of component so it doesn't get redefined on every render
 const LOGIN_URL = '/auth';
@@ -10,7 +11,7 @@ const LOGIN_URL = '/auth';
 // Login component
 const Login = () => {
     // Context
-    const { setAuth, persist, setPersist } = useAuth();
+    const { setAuth } = useAuth();
 
     // Navigation
     const navigate = useNavigate();
@@ -22,9 +23,10 @@ const Login = () => {
     const errRef = useRef();
     
     // State
-    const [user, setUser] = useLocalStorage('user', '');
+    const [user, resetUser, userAttributes] = useInput('user', '');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
+    const [check, toggleCheck] = useToggle('persist', false);
 
     // Set focus on user input when page loads
     useEffect(() => {
@@ -58,7 +60,7 @@ const Login = () => {
             setAuth({ user, pwd, roles, accessToken });
 
             // Clear form
-            setUser('');
+            resetUser();
             setPwd('');
 
             // Navigate back to redirect location or home
@@ -82,15 +84,6 @@ const Login = () => {
         };
     };
 
-    // Toggle persist
-    const togglePersist = () => {
-        setPersist(prev => !prev);
-    }
-    // Set persist in local storage
-    useEffect(() => {
-        localStorage.setItem('persist', persist);
-    }, [persist]);
-
     return (
         <section>
             {/* Error message display */}
@@ -105,8 +98,7 @@ const Login = () => {
                     id="username" 
                     ref={userRef}
                     autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    value={user}
+                    {...userAttributes}
                     required
                 />
 
@@ -124,8 +116,8 @@ const Login = () => {
                     <input
                         type="checkbox"
                         id="persist"
-                        onChange={togglePersist}
-                        checked={persist}
+                        onChange={toggleCheck}
+                        checked={check}
                     />
                     <label htmlFor='persist'> Trust this device? </label>
                 </div>
