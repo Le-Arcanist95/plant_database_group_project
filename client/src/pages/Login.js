@@ -82,52 +82,40 @@ const Login = () => {
     };
 
     return (
-        <>
-            {success ? (
-                <section>
-                    <h1> You have successfully logged in! </h1>
-                    <br />
-                    <p>
-                        <a href="/"> Return to Home </a>
-                    </p>
-                </section>
-            ) : (
-                <section>
-                    {/* Error message display */}
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> 
-                        {errMsg} 
-                    </p>
-                    <h1> Sign In </h1>
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="username"> Username: </label>
-                        <input 
-                            type="text" 
-                            id="username" 
-                            ref={userRef}
-                            autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
-                            required
-                        />
+        <section>
+            {/* Error message display */}
+            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> 
+                {errMsg} 
+            </p>
+            <h1> Sign In </h1>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="username"> Username: </label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    ref={userRef}
+                    autoComplete="off"
+                    onChange={(e) => setUser(e.target.value)}
+                    value={user}
+                    required
+                />
 
-                        <label htmlFor="password"> Password: </label>
-                        <input
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                        />
-                        
-                        <button> Sign In </button>
-                    </form>
-                    <p>
-                        Don't have an account? <br />
-                        <a href="/register">Register</a>
-                    </p>
-                </section>
-            )}
-        </>
+                <label htmlFor="password"> Password: </label>
+                <input
+                    type="password"
+                    id="password"
+                    onChange={(e) => setPwd(e.target.value)}
+                    value={pwd}
+                    required
+                />
+                
+                <button> Sign In </button>
+            </form>
+            <p>
+                Don't have an account? <br />
+                <a href="/register">Register</a>
+            </p>
+        </section>
     );
 }
 
