@@ -1,9 +1,9 @@
 // Purpose: To create a collapsible filter menu for the user to select from
 // Import dependencies
 import React, { useContext } from "react";
-import {PlantContext} from "./PlantContext.js"
-import { InputContext } from "./InputContext.js";
-import {RangeSlider, Toggle} from "rsuite"
+import { PlantContext } from "../context/PlantProvider.js"
+import { InputContext } from "..context/InputContext.js";
+import { RangeSlider, Toggle } from "rsuite"
 import "./styles/filters.css"
 import Collapsible from "./Collapsible.js";
 

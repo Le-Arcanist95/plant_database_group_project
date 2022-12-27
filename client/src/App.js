@@ -1,27 +1,30 @@
 import React from "react";
 import { Routes, Route } from "react-router";
-import { PlantContextProvider } from "./components/PlantContext";
-import { InputContextProvider } from "./components/InputContext";
-import Homepage from "./pages/Homepage";
+import { AuthProvider } from "./components/AuthContext.js";
+import { PlantProvider } from "./components/PlantContext.js";
+import { InputProvider } from "./components/InputContext.js";
+import Homepage from "./pages/Homepage.js";
 import About from "./pages/About.js";
-import Plant from "./pages/Plant";
-import User from "./pages/User"
+import Plant from "./pages/Plant.js";
+import User from "./pages/User.js"
 
 
 export default function App() {
     return (
         <div>
             <React.StrictMode>
-                <PlantContextProvider>
-                    <InputContextProvider>
-                    <Routes>
-                        <Route path="/" element={<Homepage />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/user/:userId" element={<User />} />
-                        <Route path="/plant/:plantId" element={<Plant />} />
-                    </Routes>
-                    </InputContextProvider>
-                </PlantContextProvider>
+                <AuthProvider>
+                    <PlantProvider>
+                        <InputProvider>
+                            <Routes>
+                                <Route path="/" element={<Homepage />} />
+                                <Route path="/about" element={<About />} />
+                                <Route path="/user/:userId" element={<User />} />
+                                <Route path="/plant/:plantId" element={<Plant />} />
+                            </Routes>
+                        </InputProvider>
+                    </PlantProvider>
+                </AuthProvider>
             </React.StrictMode>
         </div >
     );

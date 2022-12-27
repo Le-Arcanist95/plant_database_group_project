@@ -1,7 +1,7 @@
 // Purpose: To display the plant cards on the home page
 import React from "react";
 import { Link } from "react-router-dom";
-import { PlantContext } from "./PlantContext";
+import { PlantContext } from "../context/PlantProvider.js";
 import "./styles/plantCard.css";
 
 // PlantCard component

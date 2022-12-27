@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { PlantContext } from "../components/PlantContext";
+import { PlantContext } from "../context/PlantProvider.js";
 import "./styles/homepage.css";
 import PlantCard from "../components/PlantCard";
 import Filters from "../components/Filters"
