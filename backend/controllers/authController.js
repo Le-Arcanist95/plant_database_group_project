@@ -35,12 +35,21 @@ const handleLogin = async (req, res) => {
             { expiresIn: '1d' }
         );
         
-        const newRefreshTokenArray = 
+        let newRefreshTokenArray = 
             !cookies?.jwt
                 ? foundUser.refreshToken
                 : foundUser.refreshToken.filter(rToken => rToken !== cookies.jwt);
 
-        if (cookies?.jwt) res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'none' });
+        if (cookies?.jwt) {
+            const refreshToken = cookies.jwt;
+            const foundToken = User.findOne({ refreshToken: refreshToken }).exec();
+
+            if (!foundToken) {
+                newRefreshTokenArray = [];
+            }
+            
+            res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'none' });
+        }
 
         // Save refresh token to database
         foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];

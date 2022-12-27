@@ -53,12 +53,11 @@ const Login = () => {
                     withCredentials: true
                 }    
             );
-            // Get access token and roles from response
+            // Get access token from response
             const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
 
             // Set auth context
-            setAuth({ user, roles, accessToken });
+            setAuth({ user, accessToken });
 
             // Clear form
             userReset();
