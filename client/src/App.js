@@ -1,8 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router";
-import { AuthProvider } from "./components/AuthContext.js";
-import { PlantProvider } from "./components/PlantContext.js";
-import { InputProvider } from "./components/InputContext.js";
+import { AuthProvider } from "./context/AuthProvider.js";
+import { PlantProvider } from "./context/PlantContext.js";
+import { InputProvider } from "./context/InputContext.js";
 import Homepage from "./pages/Homepage.js";
 import About from "./pages/About.js";
 import Plant from "./pages/Plant.js";
