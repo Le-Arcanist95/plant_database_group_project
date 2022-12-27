@@ -3,8 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { backendClient } from '../api/axios.js';
 import useAuth from '../hooks/useAuth.js';
 import useInput from '../hooks/useInput.js';
-// import useToggle from '../hooks/useToggle.js';
-// import useLocalStorage from '../hooks/useLocalStorage.js';
+import useToggle from '../hooks/useToggle.js';
 import './styles/index.css';
 
 // URL for login request -- outside of component so it doesn't get redefined on every render
@@ -28,7 +27,7 @@ const Login = () => {
     const [user, userReset, userAttributes] = useInput('user', '');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    // const [check, toggleCheck] = useToggle('persist', false);
+    const [check, toggleCheck] = useToggle('persist', false);
 
     // Set focus on user input when page loads
     useEffect(() => {
@@ -114,7 +113,7 @@ const Login = () => {
                 />
                 
                 <button> Sign In </button>
-                {/* <div className='persistCheck'>
+                <div className='persistCheck'>
                     <input
                         type="checkbox"
                         id="persist"
@@ -122,7 +121,7 @@ const Login = () => {
                         checked={check}
                     />
                     <label htmlFor='persist'> Trust this device? </label>
-                </div> */}
+                </div>
             </form>
             <p>
                 Don't have an account? <br />
