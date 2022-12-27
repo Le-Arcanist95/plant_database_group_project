@@ -9,7 +9,7 @@ const LOGIN_URL = '/auth';
 // Login component
 const Login = () => {
     // Context
-    const { setAuth } = useAuth();
+    const { setAuth, persist, setPersist } = useAuth();
 
     // Navigation
     const navigate = useNavigate();
@@ -81,6 +81,15 @@ const Login = () => {
         };
     };
 
+    // Toggle persist
+    const togglePersist = () => {
+        setPersist(prev => !prev);
+    }
+    // Set persist in local storage
+    useEffect(() => {
+        localStorage.setItem('persist', persist);
+    }, [persist]);
+
     return (
         <section>
             {/* Error message display */}
@@ -110,6 +119,15 @@ const Login = () => {
                 />
                 
                 <button> Sign In </button>
+                <div className='persistCheck'>
+                    <input
+                        type="checkbox"
+                        id="persist"
+                        onChange={togglePersist}
+                        checked={persist}
+                    />
+                    <label htmlFor='persist'> Trust this device? </label>
+                </div>
             </form>
             <p>
                 Don't have an account? <br />
