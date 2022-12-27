@@ -1,6 +1,7 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../context/AuthProvider.js';
-import { serverClient } from '../api/axios.js'
+import React, { useRef, useState, useEffect } from 'react';
+import { serverClient } from '../api/axios.js';
+import useAuth from '../hooks/useAuth.js';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 // URL for login request -- outside of component so it doesn't get redefined on every render
 const LOGIN_URL = '/auth';
@@ -8,7 +9,12 @@ const LOGIN_URL = '/auth';
 // Login component
 const Login = () => {
     // Context
-    const { setAuth } = useContext(AuthContext);
+    const { setAuth } = useAuth();
+
+    // Navigation
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     // Refs
     const userRef = useRef();
@@ -18,7 +24,6 @@ const Login = () => {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
 
     // Set focus on user input when page loads
     useEffect(() => {
@@ -55,8 +60,9 @@ const Login = () => {
             setUser('');
             setPwd('');
 
-            // Set success state
-            setSuccess(true);
+            // Navigate back to redirect location or home
+            navigate(from, {replace: true});
+
         } catch (err) {
             // Handle error response
             if (!err?.response) {
@@ -76,52 +82,40 @@ const Login = () => {
     };
 
     return (
-        <>
-            {success ? (
-                <section>
-                    <h1> You have successfully logged in! </h1>
-                    <br />
-                    <p>
-                        <a href="/"> Return to Home </a>
-                    </p>
-                </section>
-            ) : (
-                <section>
-                    {/* Error message display */}
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> 
-                        {errMsg} 
-                    </p>
-                    <h1> Sign In </h1>
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="username"> Username: </label>
-                        <input 
-                            type="text" 
-                            id="username" 
-                            ref={userRef}
-                            autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
-                            required
-                        />
+        <section>
+            {/* Error message display */}
+            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> 
+                {errMsg} 
+            </p>
+            <h1> Sign In </h1>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="username"> Username: </label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    ref={userRef}
+                    autoComplete="off"
+                    onChange={(e) => setUser(e.target.value)}
+                    value={user}
+                    required
+                />
 
-                        <label htmlFor="password"> Password: </label>
-                        <input
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                        />
-                        
-                        <button> Sign In </button>
-                    </form>
-                    <p>
-                        Don't have an account? <br />
-                        <a href="/register">Register</a>
-                    </p>
-                </section>
-            )}
-        </>
+                <label htmlFor="password"> Password: </label>
+                <input
+                    type="password"
+                    id="password"
+                    onChange={(e) => setPwd(e.target.value)}
+                    value={pwd}
+                    required
+                />
+                
+                <button> Sign In </button>
+            </form>
+            <p>
+                Don't have an account? <br />
+                <a href="/register">Register</a>
+            </p>
+        </section>
     );
 }
 

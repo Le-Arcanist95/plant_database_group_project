@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthProvider.js";
 import { PlantProvider } from "./context/PlantContext.js";
 import { InputProvider } from "./context/InputContext.js";
@@ -15,7 +15,9 @@ root.render(
             <AuthProvider>
                 <PlantProvider>
                     <InputProvider>
-                        <App />
+                        <Routes>
+                            <Route path="/*" element={<App />}/>
+                        </Routes>
                     </InputProvider>
                 </PlantProvider>
             </AuthProvider>
