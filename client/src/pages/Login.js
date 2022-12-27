@@ -1,6 +1,15 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../context/AuthProvider.js';
+import { serverClient } from '../api/axios.js'
 
+// URL for login request -- outside of component so it doesn't get redefined on every render
+const LOGIN_URL = '/auth';
+
+// Login component
 const Login = () => {
+    // Context
+    const { setAuth } = useContext(AuthContext);
+
     // Refs
     const userRef = useRef();
     const errRef = useRef();
@@ -25,10 +34,46 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setUser('');
-        setPwd('');
-        setSuccess(true);
-    }
+        try {
+            // Send login request to server
+            const response = await serverClient.post(
+                LOGIN_URL, 
+                JSON.stringify({ username: user, password: pwd }),
+                { 
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }    
+            );
+            // Get access token and roles from response
+            const accessToken = response?.data?.accessToken;
+            const roles = response?.data?.roles;
+
+            // Set auth context
+            setAuth({ user, pwd, roles, accessToken });
+
+            // Clear form
+            setUser('');
+            setPwd('');
+
+            // Set success state
+            setSuccess(true);
+        } catch (err) {
+            // Handle error response
+            if (!err?.response) {
+                setErrMsg('Server is not responding');
+            } else if (err.response?.status === 400) {
+                setErrMsg('Please enter all fields');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Invalid credentials');
+            } else if (err.response?.status === 500) {
+                setErrMsg('Server error');
+            } else {
+                setErrMsg('Unknown error');
+            }
+            // Set focus on error message for screen reader
+            errRef.current.focus();
+        };
+    };
 
     return (
         <>
