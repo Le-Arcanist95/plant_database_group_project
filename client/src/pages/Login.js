@@ -9,6 +9,7 @@ const Login = () => {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
 
     // Set focus on user input when page loads
     useEffect(() => {
@@ -24,44 +25,58 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        
+        setUser('');
+        setPwd('');
+        setSuccess(true);
     }
 
     return (
-        <section>
-            {/* Error message display */}
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> 
-                {errMsg} 
-            </p>
-            <h1> Sign In </h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username"> Username: </label>
-                <input 
-                    type="text" 
-                    id="username" 
-                    ref={userRef}
-                    autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    value={user}
-                    required
-                />
+        <>
+            {success ? (
+                <section>
+                    <h1> You have successfully logged in! </h1>
+                    <br />
+                    <p>
+                        <a href="/"> Return to Home </a>
+                    </p>
+                </section>
+            ) : (
+                <section>
+                    {/* Error message display */}
+                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> 
+                        {errMsg} 
+                    </p>
+                    <h1> Sign In </h1>
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="username"> Username: </label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(e) => setUser(e.target.value)}
+                            value={user}
+                            required
+                        />
 
-                <label htmlFor="password"> Password: </label>
-                <input
-                    type="password"
-                    id="password"
-                    onChange={(e) => setPwd(e.target.value)}
-                    value={pwd}
-                    required
-                />
-                
-                <button> Sign In </button>
-            </form>
-            <p>
-                Don't have an account? <br />
-                <a href="/register">Register</a>
-            </p>
-        </section>
+                        <label htmlFor="password"> Password: </label>
+                        <input
+                            type="password"
+                            id="password"
+                            onChange={(e) => setPwd(e.target.value)}
+                            value={pwd}
+                            required
+                        />
+                        
+                        <button> Sign In </button>
+                    </form>
+                    <p>
+                        Don't have an account? <br />
+                        <a href="/register">Register</a>
+                    </p>
+                </section>
+            )}
+        </>
     );
 }
 
