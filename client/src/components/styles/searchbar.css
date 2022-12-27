@@ -3,6 +3,8 @@
     width: 80%;
     position: relative;
     text-align: center;
+    margin: 1em auto;
+    border: 1px solid rgb(0,0,0,0.1);
 }
 
 

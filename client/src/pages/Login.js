@@ -4,7 +4,7 @@ import { backendClient } from '../api/axios.js';
 import useAuth from '../hooks/useAuth.js';
 import useInput from '../hooks/useInput.js';
 import useToggle from '../hooks/useToggle.js';
-import './styles/index.css';
+import './styles/auth.css';
 
 // URL for login request -- outside of component so it doesn't get redefined on every render
 const LOGIN_URL = '/auth';
@@ -53,12 +53,11 @@ const Login = () => {
                     withCredentials: true
                 }    
             );
-            // Get access token and roles from response
+            // Get access token from response
             const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
 
             // Set auth context
-            setAuth({ user, pwd, roles, accessToken });
+            setAuth({ user, accessToken });
 
             // Clear form
             userReset();
@@ -86,7 +85,7 @@ const Login = () => {
     };
 
     return (
-        <section>
+        <section className='login'>
             {/* Error message display */}
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> 
                 {errMsg} 

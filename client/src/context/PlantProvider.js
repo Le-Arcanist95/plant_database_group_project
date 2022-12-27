@@ -57,10 +57,7 @@ export const PlantProvider = ({children}) => {
             }
             getPlants();
         } else {isMounted.current = true}    
-    }, [searchFilters, searchQuery])
-
-
-    console.log(collection)
+    }, [searchFilters, searchQuery]);
 
     return (
         <PlantContext.Provider value={{
@@ -76,7 +73,7 @@ export const PlantProvider = ({children}) => {
             {children}
         </PlantContext.Provider>
     );
-}
+};
 
 
 export default PlantContext;
