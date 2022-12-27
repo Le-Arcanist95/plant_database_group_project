@@ -16,16 +16,15 @@ const handleRefreshToken = async (req, res) => {
             process.env.REFRESH_TOKEN_SECRET,
             async (err, decoded) => {
                 if (err) return res.sendStatus(403); //Forbidden
-                console.log('Refresh token reuse detected')
-                const hackedUser = await User.findOne({ username: decoded.username }).exec(); // Find user with refresh token
-                hackedUser.refreshToken = []; // Clear refresh token
-                const result = await hackedUser.save(); // Save changes
+                const compromisedUser = await User.findOne({ username: decoded.username }).exec(); // Find user with refresh token
+                compromisedUser.refreshToken = []; // Clear refresh token
+                await compromisedUser.save(); // Save changes
             }
         );
         return res.sendStatus(403); //Forbidden
     };
 
-    const newRefreshTokenArray = foundUser.refreshToken.filter(rt => rt !== refreshToken); // Remove refresh token from array
+    const newRefreshTokenArray = foundUser.refreshToken.filter(rToken => rToken !== refreshToken); // Remove refresh token from array
 
     // Verify refresh token
     jwt.verify(
@@ -36,13 +35,13 @@ const handleRefreshToken = async (req, res) => {
             if (err) {
                 foundUser.refreshToken = [...newRefreshTokenArray]; // Remove refresh token from array
                 const result = await foundUser.save(); // Save changes
+                console.log(result);
             }
+            // Refresh token was tampered
             if (err || foundUser.username !== decoded.username) return res.sendStatus(403); // Forbidden
 
             // Refresh token was still valid
-            const roles = Object.values(foundUser.roles); // Get roles from user
-            
-            // Create new access token
+            const roles = Object.values(foundUser.roles);
             const accessToken = jwt.sign(
                 {
                     "UserInfo": {
@@ -62,7 +61,8 @@ const handleRefreshToken = async (req, res) => {
             );
             // Saving refreshToken with current user
             foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
-            await foundUser.save();
+            const result = await foundUser.save();
+            console.log(result);
 
             // Creates Secure Cookie with refresh token
             res.cookie('jwt', newRefreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 86400000 });

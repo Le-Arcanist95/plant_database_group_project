@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const handleLogin = async (req, res) => {
-    // Get username and password from request body
+    const cookies = req.cookies;
     const { user, password } = req.body;
     if (!user || !password) return res.status(400).json({ msg: 'Please enter all fields' });
 
@@ -29,20 +29,26 @@ const handleLogin = async (req, res) => {
                 { expiresIn: '15m' }
         );
         // Create refresh token
-        const refreshToken = jwt.sign(
+        const newRefreshToken = jwt.sign(
             { "username": foundUser.username },
             process.env.REFRESH_TOKEN_SECRET,
             { expiresIn: '1d' }
         );
+        
+        const newRefreshTokenArray = 
+            !cookies?.jwt
+                ? foundUser.refreshToken
+                : foundUser.refreshToken.filter(rToken => rToken !== cookies.jwt);
+
+        if (cookies?.jwt) res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'none' });
 
         // Save refresh token to database
-        foundUser.refreshToken = refreshToken;
+        foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
         const result = await foundUser.save();
         console.log(result);
-        console.log(roles);
 
         // Send refresh token as cookie
-        res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 86400000 });
+        res.cookie('jwt', newRefreshToken, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 86400000 });
         
         // Send access token and roles
         res.json({ accessToken });
