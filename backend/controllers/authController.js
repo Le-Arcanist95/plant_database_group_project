@@ -45,7 +45,7 @@ const handleLogin = async (req, res) => {
         res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 86400000 });
         
         // Send access token and roles
-        res.json({ roles, accessToken });
+        res.json({ accessToken });
     
     } else if (!match) return res.status(401).json({ msg: 'Invalid credentials' });
 }
