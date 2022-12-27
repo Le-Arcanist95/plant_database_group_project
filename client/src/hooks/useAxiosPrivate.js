@@ -14,7 +14,7 @@ const useAxiosPrivate = () => {
                     config.headers['Authorization'] = `Bearer ${auth.accessToken}`;
                 };
                 return config;
-            }, (error) => Promise.reject(error
+            }, (error) => Promise.reject(error)
         );
         
         const responseIntercept = backendPrivateServer.interceptors.response.use(
@@ -37,5 +37,7 @@ const useAxiosPrivate = () => {
         }
     }, [auth, refresh]);
 
-    return useAxiosPrivate;
-}
+    return backendPrivateServer;
+};
+
+export default useAxiosPrivate;
