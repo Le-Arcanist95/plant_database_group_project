@@ -1,7 +1,14 @@
 import axios from 'axios';
+const SERVER_URL = 'http://localhost:1254';
 
-const serverClient = axios.create({
-    baseURL: 'https://localhost:1254'
+const backendClient = axios.create({
+    baseURL: SERVER_URL,
+});
+
+const privateBackendClient = axios.create({
+    baseURL: SERVER_URL,
+    headers: { 'Content-Type': 'application/json' },
+    withCredentials: true,
 });
 
 const trefleClient = axios.create({
@@ -11,4 +18,4 @@ const trefleClient = axios.create({
     }
 });
 
-export { serverClient, trefleClient };
+export { backendClient, privateBackendClient, trefleClient };

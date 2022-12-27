@@ -1,7 +1,7 @@
 // Purpose: Searchbar component for the Plant Database app
 import React, { useContext } from "react";
-import { PlantContext } from "..context/PlantContext.js";
-import { InputContext } from "../context/InputProvider.js";
+import PlantContext from "../context/PlantProvider.js"; 
+import InputContext from "../context/InputProvider.js";
 import "./styles/searchbar.css";
 
 // Searchbar component

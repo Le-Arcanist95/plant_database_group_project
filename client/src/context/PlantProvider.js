@@ -4,7 +4,7 @@ import { trefleClient } from "../api/axios";
 const PlantContext = React.createContext();
 
 // PlantContextProvider component
-export const PlantContextProvider = ({children}) => {
+export const PlantProvider = ({children}) => {
     // const [authToken, setAuthToken] = useState('');
     const [searchParams, setSearchParams] = useState({})
     const [searchQuery, setSearchQuery] = useState("")

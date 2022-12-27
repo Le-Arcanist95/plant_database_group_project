@@ -1,7 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { serverClient } from '../api/axios.js';
-import useAuth from '../hooks/useAuth.js';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { backendClient } from '../api/axios.js';
+import useAuth from '../hooks/useAuth.js';
+import useInput from '../hooks/useInput.js';
+import useToggle from '../hooks/useToggle.js';
+import './styles/index.css';
 
 // URL for login request -- outside of component so it doesn't get redefined on every render
 const LOGIN_URL = '/auth';
@@ -21,9 +24,10 @@ const Login = () => {
     const errRef = useRef();
     
     // State
-    const [user, setUser] = useState('');
+    const [user, resetUser, userAttributes] = useInput('user', '');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
+    const [check, toggleCheck] = useToggle('persist', false);
 
     // Set focus on user input when page loads
     useEffect(() => {
@@ -41,7 +45,7 @@ const Login = () => {
 
         try {
             // Send login request to server
-            const response = await serverClient.post(
+            const response = await backendClient.post(
                 LOGIN_URL, 
                 JSON.stringify({ username: user, password: pwd }),
                 { 
@@ -57,7 +61,7 @@ const Login = () => {
             setAuth({ user, pwd, roles, accessToken });
 
             // Clear form
-            setUser('');
+            resetUser();
             setPwd('');
 
             // Navigate back to redirect location or home
@@ -95,8 +99,7 @@ const Login = () => {
                     id="username" 
                     ref={userRef}
                     autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    value={user}
+                    {...userAttributes}
                     required
                 />
 
@@ -110,6 +113,15 @@ const Login = () => {
                 />
                 
                 <button> Sign In </button>
+                <div className='persistCheck'>
+                    <input
+                        type="checkbox"
+                        id="persist"
+                        onChange={toggleCheck}
+                        checked={check}
+                    />
+                    <label htmlFor='persist'> Trust this device? </label>
+                </div>
             </form>
             <p>
                 Don't have an account? <br />

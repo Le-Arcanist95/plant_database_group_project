@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router";
 import Layout from "./components/Layout.js";
 import Login from "./pages/Login.js";
 import Register from "./pages/Register.js";
+import PersistLogin from "./components/PersistLogin.js";
 import Homepage from "./pages/Homepage.js";
 import Unauthorized from "./pages/Unauthorized.js";
 import About from "./pages/About.js";
@@ -24,9 +25,11 @@ export default function App() {
                 <Route path="unauthorized" element={<Unauthorized />} />
 
                 {/* Private Routes */}
-                <Route element={<RequireAuth allowedRoles={[2000, 4000, 9000]} />}>
-                    <Route path="profile/:userId" element={<Profile />} />
-                    <Route path="plant/:plantId" element={<Plant />} />
+                <Route element={<PersistLogin />} >
+                    <Route element={<RequireAuth allowedRoles={[2000, 4000, 9000]} />}>
+                        <Route path="profile/:userId" element={<Profile />} />
+                        <Route path="plant/:plantId" element={<Plant />} />
+                    </Route>
                 </Route>
 
                 {/* Catch-all */}
