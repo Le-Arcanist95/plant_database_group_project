@@ -1,12 +1,11 @@
 // Purpose: Header component for the app
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Searchbar from "./Searchbar";
 import "./styles/header.css";
 
 
 // TODO: on window load animate logo in 
-export default function Header({ isActive }) {
+export default function Header() {
     // Render Header
     return (
         <header className="header-container">
@@ -17,10 +16,9 @@ export default function Header({ isActive }) {
             </nav>
 
             {/* HERO */}
-            <section className="hero">
+            <div className="hero">
                 <span className="logo">PlantProject</span>
-                <Searchbar />
-            </section>
+            </div>
 
 
             <div className="custom-shape-divider-bottom-1671001641">

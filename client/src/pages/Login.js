@@ -58,7 +58,7 @@ const Login = () => {
             const roles = response?.data?.roles;
 
             // Set auth context
-            setAuth({ user, pwd, roles, accessToken });
+            setAuth({ user, roles, accessToken });
 
             // Clear form
             userReset();
