@@ -1,6 +1,6 @@
 // Purpose: Header component for the app
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Searchbar from "./Searchbar";
 import "./styles/header.css";
 
@@ -11,8 +11,9 @@ export default function Header({ isActive }) {
     return (
         <header className="header-container">
             <nav>
-                <Link to="/" className={`link ${isActive.home && "active"}`}>Home</Link>
-                <Link to="/about" className={`link ${isActive.about && "active"}`}>About</Link>
+                <NavLink to="/" className="link-home"> Home </NavLink>
+                <NavLink to="/about" className="link-about"> About </NavLink>
+                <NavLink to="/login" className="link-login"> Login </NavLink>
             </nav>
 
             {/* HERO */}
