@@ -3,16 +3,8 @@ import { trefleClient } from "../api/axios";
 
 const PlantContext = React.createContext();
 
-// Create axios instance and pass through token
-const trefleClient = axios.create({
-    baseURL: 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/',
-    params: {
-        token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
-    }
-})
-
 // PlantContextProvider component
-function PlantContextProvider(props) {
+export const PlantContextProvider = ({children}) => {
     // const [authToken, setAuthToken] = useState('');
     const [searchParams, setSearchParams] = useState({})
     const [searchQuery, setSearchQuery] = useState("")
@@ -81,10 +73,10 @@ function PlantContextProvider(props) {
             searchParams: searchParams,
             setSearchParams: setSearchParams
         }}>
-            {props.children}
+            {children}
         </PlantContext.Provider>
     );
 }
 
 
-export { PlantContextProvider, PlantContext };
+export default PlantContext;

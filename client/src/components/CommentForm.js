@@ -1,7 +1,7 @@
 // Import dependencies
 import React from "react"
-import { PlantContext } from "./PlantContext"
-import { InputContext } from "./InputContext"
+import { PlantContext } from "../context/PlantProvider.js"
+import { InputContext } from "..context/InputContext.js"
 
 // CommentForm component
 export default function CommentForm() {

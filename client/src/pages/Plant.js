@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom"
-import { PlantContext } from "../components/PlantContext";
+import { PlantContext } from "../context/PlantProvider.js";
 import CommentCard from "../components/CommentCard";
 import CommentForm from "../components/CommentForm";
 
