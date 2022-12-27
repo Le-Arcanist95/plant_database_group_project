@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { serverClient } from './api/axios.js';
+import { backendClient } from '../api/axios.js';
+import './styles/index.css';
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,24}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -63,7 +64,7 @@ const Register = () => {
         }
 
         try {
-            const response = await serverClient.post(REGISTER_URL, 
+            const response = await backendClient.post(REGISTER_URL, 
             JSON.stringify({ username: user, password: pwd }),
             { 
                 headers: { 'Content-Type': 'application/json' },

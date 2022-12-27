@@ -1,12 +1,12 @@
-import { serverClient } from '../api/axios.js';
-import { useAuth } from './useAuth.js';
+import { backendClient } from '../api/axios.js';
+import useAuth from './useAuth.js';
 
 const useRefreshToken = () => {
     const { setAuth } = useAuth();
 
     const refresh = async () => {
         try {
-            const { data } = await serverClient.get('/refresh', { withCredentials: true });
+            const { data } = await backendClient.get('/refresh', { withCredentials: true });
             setAuth(prevAuth => {
                 return { 
                     ...prevAuth,

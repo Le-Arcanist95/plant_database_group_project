@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { serverClient } from '../api/axios.js';
+import { backendClient } from '../api/axios.js';
 import useAuth from '../hooks/useAuth.js';
 import useInput from '../hooks/useInput.js';
 import useToggle from '../hooks/useToggle.js';
+import './styles/index.css';
 
 // URL for login request -- outside of component so it doesn't get redefined on every render
 const LOGIN_URL = '/auth';
@@ -44,7 +45,7 @@ const Login = () => {
 
         try {
             // Send login request to server
-            const response = await serverClient.post(
+            const response = await backendClient.post(
                 LOGIN_URL, 
                 JSON.stringify({ username: user, password: pwd }),
                 { 

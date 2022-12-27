@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { PlantContext } from "../context/PlantProvider.js";
+import PlantContext from "../context/PlantProvider.js";
 import "./styles/homepage.css";
 import PlantCard from "../components/PlantCard";
 import Filters from "../components/Filters"
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+// import Header from "../components/Header";
+// import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 
 // Homepage component
