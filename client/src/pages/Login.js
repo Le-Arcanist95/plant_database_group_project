@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { serverClient } from '../api/axios.js';
 import useAuth from '../hooks/useAuth.js';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import useLocalStorage from '../hooks/useLocalStorage.js';
 
 // URL for login request -- outside of component so it doesn't get redefined on every render
 const LOGIN_URL = '/auth';
@@ -21,7 +22,7 @@ const Login = () => {
     const errRef = useRef();
     
     // State
-    const [user, setUser] = useState('');
+    const [user, setUser] = useLocalStorage('user', '');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
