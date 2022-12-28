@@ -51,7 +51,7 @@ const getToken = async () => {
     return data;
 };
 
-app.get('/auth', async (req, res) => {
+app.get('/trefleAuth', async (req, res) => {
     const authToken = await getToken();
     console.log(authToken);
     res.send(authToken);

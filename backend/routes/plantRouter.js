@@ -2,7 +2,6 @@ const express = require("express");
 const Plant = require("../models/Plant.js");
 const plantRouter = express.Router();
 
-
 plantRouter.get("/", (req, res, next) => {
         Plant.find((err, results) => {
             if (err) {

@@ -2,8 +2,6 @@ const express = require("express");
 const Comment = require("../models/Comment.js");
 const commentRouter = express.Router();
 
-
-
 commentRouter.get("/", (req, res, next) => {
     Comment.find((err, results) => {
             if (err) {
