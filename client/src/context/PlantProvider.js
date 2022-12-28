@@ -1,19 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
-// import { getAnimationEnd } from "dom-lib"; -- Why is this here?
+import { trefleClient } from "../api/axios";
 
 const PlantContext = React.createContext();
 
-// Create axios instance and pass through token
-const trefleClient = axios.create({
-    baseURL: 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/',
-    params: {
-        token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o',
-    }
-})
-
 // PlantContextProvider component
-function PlantContextProvider(props) {
+export const PlantProvider = ({children}) => {
     // const [authToken, setAuthToken] = useState('');
     const [searchParams, setSearchParams] = useState({})
     const [searchQuery, setSearchQuery] = useState("")
@@ -22,12 +13,11 @@ function PlantContextProvider(props) {
     const [selectedPlant, setSelectedPlant] = useState();
     const [newComment, setNewComment] = useState({});
     const isMounted = useRef(false)
+
     // TO DO - this func should take the new comment from the inputContext and add it to our database
     function addNewComment() {
         // axios.put('');
     }
-
-    // IMPORTANT -- Dependency arrays for both our useEffects were not tracking our functions properly. This was the second time I've pulled down code and encountered the error. These are functions that alter state and should either be tracked or moved inside of the effect. The dependency array is meant to track "reactive" variables and our functions directly interact with state which is exactly that. If we are not tracking the functions that modify state then we are not properly tracking the changes to state.filterResults and getPlants have been moved inside of their respective useEffect. If the functions must live outside of useEffect, they should be wrapped in useCallback. It is best practice to use useCallback when passing functions to child components, as well. - Levi
 
     // runs filter search results any time searchparams is updated 
     useEffect(() => {
@@ -67,10 +57,7 @@ function PlantContextProvider(props) {
             }
             getPlants();
         } else {isMounted.current = true}    
-    }, [searchFilters, searchQuery])
-
-
-    console.log(collection)
+    }, [searchFilters, searchQuery]);
 
     return (
         <PlantContext.Provider value={{
@@ -83,11 +70,10 @@ function PlantContextProvider(props) {
             searchParams: searchParams,
             setSearchParams: setSearchParams
         }}>
-            {props.children}
+            {children}
         </PlantContext.Provider>
     );
-}
+};
 
 
-export { PlantContextProvider, PlantContext };
-
+export default PlantContext;

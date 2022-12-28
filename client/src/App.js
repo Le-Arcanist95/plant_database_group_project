@@ -1,28 +1,40 @@
 import React from "react";
+import RequireAuth from "./components/RequireAuth.js";
 import { Routes, Route } from "react-router";
-import { PlantContextProvider } from "./components/PlantContext";
-import { InputContextProvider } from "./components/InputContext";
-import Homepage from "./pages/Homepage";
+import Layout from "./components/Layout.js";
+import Login from "./pages/Login.js";
+import Register from "./pages/Register.js";
+import PersistLogin from "./components/PersistLogin.js";
+import Homepage from "./pages/Homepage.js";
+import Unauthorized from "./pages/Unauthorized.js";
 import About from "./pages/About.js";
-import Plant from "./pages/Plant";
-import User from "./pages/User"
+import Plant from "./pages/Plant.js";
+import Profile from "./pages/Profile.js";
+import Missing from "./pages/Missing.js";
 
 
 export default function App() {
     return (
-        <div>
-            <React.StrictMode>
-                <PlantContextProvider>
-                    <InputContextProvider>
-                    <Routes>
-                        <Route path="/" element={<Homepage />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/user/:userId" element={<User />} />
-                        <Route path="/plant/:plantId" element={<Plant />} />
-                    </Routes>
-                    </InputContextProvider>
-                </PlantContextProvider>
-            </React.StrictMode>
-        </div >
+        <Routes>
+            <Route path="/" element={<Layout/>}>
+                {/* Public Routes*/}
+                <Route path="/" element={<Homepage />} />
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route path="about" element={<About />} />
+                <Route path="unauthorized" element={<Unauthorized />} />
+
+                {/* Private Routes */}
+                <Route element={<PersistLogin />} >
+                    <Route element={<RequireAuth allowedRoles={[2000, 4000, 9000]} />}>
+                        <Route path="profile/:userId" element={<Profile />} />
+                        <Route path="plant/:plantId" element={<Plant />} />
+                    </Route>
+                </Route>
+
+                {/* Catch-all */}
+                <Route path="*" element={<Missing />} />
+            </Route>
+        </Routes>
     );
 };

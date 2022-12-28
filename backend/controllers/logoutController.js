@@ -1,9 +1,9 @@
 const User = require('../models/User');
 
 const handleLogout = async (req, res) => {
-    const cookies = req.cookies;
-    if (!cookies?.jwt) return res.sendStatus(204);
-    const refreshToken = cookies.jwt;
+    const cookies = req.cookies; // Get cookies from request
+    if (!cookies?.jwt) return res.sendStatus(204); // No content
+    const refreshToken = cookies.jwt; // Get refresh token from cookie
     
     const foundUser = await User.findOne({ refreshToken }).exec();
     if (!foundUser) {
@@ -12,7 +12,7 @@ const handleLogout = async (req, res) => {
     }
 
     // Clear refresh token from database
-    foundUser.refreshToken = null;
+    foundUser.refreshToken = foundUser.refreshToken.filter(token => token !== refreshToken);
     const result = await foundUser.save();
     console.log(result);
     

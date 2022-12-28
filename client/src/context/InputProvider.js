@@ -4,7 +4,7 @@ const InputContext = React.createContext();
 // This context file holds the userinput in one place prior to them hitting either search or update results
 // I separated this part out both to store this information in one place and also to improve the UX (when user types a search and adds filters they should be able to hit either button and see results.)
 
-function InputContextProvider(props) {
+export const InputProvider = ({ children }) => {
     const [inputValue, setInputValue] = useState({search: ""});
     const [userInput, setUserInput] = useState({
         // TO DO - state should get automatically updated with the userName 
@@ -27,9 +27,9 @@ function InputContextProvider(props) {
             inputValue: inputValue,
             setInputValue: setInputValue
         }}>
-            {props.children}
+            {children}
         </InputContext.Provider>    
     )
 }
 
-export { InputContextProvider, InputContext }
+export default InputContext;
