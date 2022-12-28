@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credentials');
 const mongoose = require("mongoose");
 const connectDB = require('./config/dbConnection');
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT;
 
 // Connect to MongoDB Database
 connectDB();
@@ -34,17 +34,17 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 // Trefle API
-const params = {  
-    origin: 'http://localhost:3000/',  
-    ip: '127.0.0.1',  
+const params = {
+    origin: 'http://localhost:3000/',
+    ip: '127.0.0.1',
     token: 'yiibkfmOBF4rXDUHS87VjTQylY0SNSxw2Noz6VOq_2o'
-}
-const getToken = async () => {  
-    const response = await fetch('https://trefle.io/api/auth/claim', {      
-        method: 'post',      
-        body: JSON.stringify(params),      
-        headers: { 'Content-Type': 'application/json' }    
-    });  
+};
+const getToken = async () => {
+    const response = await fetch('https://trefle.io/api/auth/claim', {
+        method: 'post',
+        body: JSON.stringify(params),
+        headers: { 'Content-Type': 'application/json' }
+    });
     const data = await response.json();
     return data;
 };
@@ -83,7 +83,7 @@ app.all('*', (req, res) => {
 // Error Handler
 app.use((err, req, res, next) => {
     console.log(err);
-    return res.status(500).send({errMsg: err.message}); // Set error status and return error message to user.
+    return res.status(500).send({ errMsg: err.message }); // Set error status and return error message to user.
 });
 
 
