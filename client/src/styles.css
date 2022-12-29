@@ -64,7 +64,13 @@ a:hover{
     border-radius: 0.5rem;
 }
 
-.login form {
+.login h2,
+.register h2{
+    color: var(--green);
+}
+
+.login form,
+.register form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -72,9 +78,16 @@ a:hover{
     padding-bottom: 1rem;
 }
 
+.login input,
+.register input{
+    border: 1px solid var(--green);
+}
+
 .login input[type="text"],
 input[type="password"],
-.login button {
+.login button,
+.register input,
+.register button {
   font-family: 'Nunito', sans-serif;
   font-size: 22px;
   padding: 0.25rem;
@@ -88,6 +101,16 @@ input[type="password"],
 
 .login button {
   padding: 0.5rem;
+  background-color: var(--green);
+  color: white;
+}
+
+.login button:hover{
+    background-color: var(--green-shade);
+}
+
+.login button:active{
+    background-color: rgb(87, 109, 96);
 }
 
 .instructions {
