@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, createContext } from "react";
 import { trefleClient } from "../api/axios";
 
-const PlantContext = React.createContext();
+const PlantContext = createContext();
 
 // PlantContextProvider component
 export const PlantProvider = ({children}) => {
@@ -10,14 +10,14 @@ export const PlantProvider = ({children}) => {
     const [searchQuery, setSearchQuery] = useState("")
     const [searchFilters, setSearchFilters] = useState("")
     const [collection, setCollection] = useState([]);
-    const [selectedPlant, setSelectedPlant] = useState();
-    const [newComment, setNewComment] = useState({});
+    const [selectedPlant, setSelectedPlant] = useState({});
     const isMounted = useRef(false)
 
-    // TO DO - this func should take the new comment from the inputContext and add it to our database
-    function addNewComment() {
-        // axios.put('');
-    }
+    const getPlant =  useCallback((plantId) => {
+        trefleClient.get(`plants/${plantId}`)
+            .then(res => setSelectedPlant(res.data.data))
+            .catch(error => console.log(error));
+    }, []);
 
     // runs filter search results any time searchparams is updated 
     useEffect(() => {
@@ -51,29 +51,28 @@ export const PlantProvider = ({children}) => {
         if (isMounted.current) {
             // Purpose: Makes the api call to get the plants based on the search query and filters (renamed as GetPlants for clarity)
             const getPlants = () => {
-                trefleClient.get(`species${searchQuery}${searchFilters}`)
+                trefleClient.get(`plants${searchQuery}${searchFilters}`)
                     .then(res => setCollection(res.data.data))
                     .catch(error => console.log(error));
             }
             getPlants();
         } else {isMounted.current = true}    
     }, [searchFilters, searchQuery]);
+    
+    console.log(collection)
 
     return (
         <PlantContext.Provider value={{
             collection: collection,
-            newComment: newComment,
-            setNewComment: setNewComment,
-            addNewComment: addNewComment,
             selectedPlant: selectedPlant,
             setSelectedPlant: setSelectedPlant,
             searchParams: searchParams,
-            setSearchParams: setSearchParams
+            setSearchParams: setSearchParams,
+            getPlant: getPlant
         }}>
             {children}
         </PlantContext.Provider>
     );
 };
-
 
 export default PlantContext;

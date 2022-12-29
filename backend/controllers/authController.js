@@ -4,11 +4,11 @@ const jwt = require('jsonwebtoken');
 
 const handleLogin = async (req, res) => {
     const cookies = req.cookies;
-    const { user, password } = req.body;
-    if (!user || !password) return res.status(400).json({ msg: 'Please enter all fields' });
+    const { username, password } = req.body;
+    if (!username || !password) return res.status(400).json({ msg: 'Please enter all fields' });
 
     // Check if user exists
-    const foundUser = await User.findOne({ username: user });
+    const foundUser = await User.findOne({ username: username });
     if (!foundUser) return res.status(400).json({ msg: 'User does not exist' });
 
     // Check if password is correct

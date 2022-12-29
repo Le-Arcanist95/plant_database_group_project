@@ -51,17 +51,17 @@ const getToken = async () => {
     return data;
 };
 
-app.get('/auth', async (req, res) => {
+app.get('/trefleAuth', async (req, res) => {
     const authToken = await getToken();
     console.log(authToken);
     res.send(authToken);
 });
 
 // Routes
-app.use('/register', require('./routes/registerRouter'));
-app.use('/auth', require('./routes/authRouter'));
-app.use('/refresh', require('./routes/refreshRouter'));
-app.use('/logout', require('./routes/logoutRouter'));
+app.use('/auth/register', require('./routes/registerRouter'));
+app.use('/auth/login', require('./routes/authRouter'));
+app.use('/auth/refresh', require('./routes/refreshRouter'));
+app.use('/auth/logout', require('./routes/logoutRouter'));
 app.use('/plants', require('./routes/plantRouter'));
 
 // Middleware for verifying JWT (All routes after must pass through authentication)
