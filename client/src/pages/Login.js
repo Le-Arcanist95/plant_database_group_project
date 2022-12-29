@@ -4,7 +4,7 @@ import { backendClient } from '../api/axios.js';
 import useAuth from '../hooks/useAuth.js';
 import useInput from '../hooks/useInput.js';
 import useToggle from '../hooks/useToggle.js';
-import './styles/auth.css';
+// import './styles/auth.css';
 
 // URL for login request -- outside of component so it doesn't get redefined on every render
 const LOGIN_URL = '/auth';
@@ -22,7 +22,7 @@ const Login = () => {
     // Refs
     const userRef = useRef();
     const errRef = useRef();
-    
+
     // State
     const [user, userReset, userAttributes] = useInput('user', '');
     const [pwd, setPwd] = useState('');
@@ -46,12 +46,12 @@ const Login = () => {
         try {
             // Send login request to server
             const response = await backendClient.post(
-                LOGIN_URL, 
+                LOGIN_URL,
                 JSON.stringify({ username: user, password: pwd }),
-                { 
+                {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
-                }    
+                }
             );
             // Get access token from response
             const accessToken = response?.data?.accessToken;
@@ -64,7 +64,7 @@ const Login = () => {
             setPwd('');
 
             // Navigate back to redirect location or home
-            navigate(from, {replace: true});
+            navigate(from, { replace: true });
 
         } catch (err) {
             // Handle error response
@@ -87,15 +87,15 @@ const Login = () => {
     return (
         <section className='login'>
             {/* Error message display */}
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> 
-                {errMsg} 
+            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+                {errMsg}
             </p>
             <h1> Sign In </h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username"> Username: </label>
-                <input 
-                    type="text" 
-                    id="username" 
+                <input
+                    type="text"
+                    id="username"
                     ref={userRef}
                     autoComplete="off"
                     {...userAttributes}
@@ -110,7 +110,7 @@ const Login = () => {
                     value={pwd}
                     required
                 />
-                
+
                 <button> Sign In </button>
                 <div className='persistCheck'>
                     <input
@@ -128,6 +128,6 @@ const Login = () => {
             </p>
         </section>
     );
-}
+};
 
 export default Login;

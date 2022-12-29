@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { backendClient } from '../api/axios.js';
-import './styles/auth.css';
+// import './styles/auth.css';
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,24}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -60,12 +60,12 @@ const Register = () => {
         }
 
         try {
-            const response = await backendClient.post(REGISTER_URL, 
-            JSON.stringify({ username: user, password: pwd }),
-            { 
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true 
-            });
+            const response = await backendClient.post(REGISTER_URL,
+                JSON.stringify({ username: user, password: pwd }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                });
             setSuccess(true); setUser(''); setValidName(false); setUserFocus(false); setPwd(''); setValidPwd(false); setPwdFocus(false); setMatchPwd(''); setValidMatch(false); setMatchFocus(false);
         } catch (err) {
             if (!err?.response) {
@@ -84,7 +84,7 @@ const Register = () => {
     };
 
     return (
-       <>
+        <>
             {success ? (
                 <section className="register-success">
                     <h2>Registration Successful</h2>
@@ -92,8 +92,8 @@ const Register = () => {
                 </section>
             ) : (
                 <section className="register">
-                    <p 
-                        ref={errRef} 
+                    <p
+                        ref={errRef}
                         className={errMsg ? "errmsg" : "offscreen"}
                         aria-live="assertive"
                     >
@@ -152,9 +152,9 @@ const Register = () => {
                         />
                         <p id="pwdnote" className={pwdFocus && pwd && !validPwd ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            Password must be 8 to 24 characters long. <br /> 
+                            Password must be 8 to 24 characters long. <br />
                             Must include at least one letter, one number, and one special character. <br />
-                            Special characters include: 
+                            Special characters include:
                             <span aria-label="exclamation mark"> ! </span>
                             <span aria-label="at sign"> @ </span>
                             <span aria-label="number sign"> # </span>

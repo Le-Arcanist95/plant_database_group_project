@@ -1,34 +1,33 @@
 // Purpose: Searchbar component for the Plant Database app
 import React, { useContext } from "react";
-import PlantContext from "../context/PlantProvider.js"; 
+import PlantContext from "../context/PlantProvider.js";
 import InputContext from "../context/InputProvider.js";
-import "./styles/searchbar.css";
+// import "./styles/searchbar.css";
 
 // Searchbar component
 export default function Searchbar(props) {
     // Context
-    const { setInputValue, inputValue } = useContext(InputContext)
-    const {setSearchParams, filterResults} = useContext(PlantContext)
+    const { setInputValue, inputValue } = useContext(InputContext);
+    const { setSearchParams, filterResults } = useContext(PlantContext);
 
     // Handle change
     const handleChange = (e) => {
-        const {name, value} = e.target
-            setInputValue(prev => ({
-                ...prev,
-                [name]: value
-            }))
-            console.log(inputValue)
-        } 
+        const { name, value } = e.target;
+        setInputValue(prev => ({
+            ...prev,
+            [name]: value
+        }));
+        console.log(inputValue);
+    };
 
 
 
     // Revision? -- const handleSubmit = () => props.handleSubmit(inputValue);
     // Handle submit
     function handleSubmit(e) {
-        e.preventDefault()
-        // console.log("queried!");
+        e.preventDefault();
         setSearchParams(inputValue);
-        filterResults()
+        filterResults();
     };
 
     // Render Searchbar

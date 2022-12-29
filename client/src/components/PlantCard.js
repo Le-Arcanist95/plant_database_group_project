@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PlantContext from "../context/PlantProvider.js";
-import "./styles/plantCard.css";
+// import "./styles/plantCard.css";
 
 // PlantCard component
 export default function PlantCard(props) {
