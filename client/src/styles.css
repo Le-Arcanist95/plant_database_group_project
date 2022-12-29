@@ -201,14 +201,21 @@ input[type="password"],
     transition: height 0.3s ease-in-out;
     height: unset;
     background-color: #f1f1f1;
+
+    user-select: none;
 }
+
 .collapsible-header {
     display: flex;
     justify-content: space-between;
+
+    user-select: none;
 }
 .collapsible-content {
     padding: 0 1rem;
     background: #f1f1f1;
+
+    user-select: none;
 }
 
 /* ===== FILTERS ===== */
