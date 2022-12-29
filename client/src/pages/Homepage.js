@@ -1,12 +1,9 @@
 import React, { useContext } from "react";
 import PlantContext from "../context/PlantProvider.js";
 import PlantCard from "../components/PlantCard";
-import Filters from "../components/Filters"
-// import Header from "../components/Header";
-// import Footer from "../components/Footer";
+import Filters from "../components/Filters";
 import Loader from "../components/Loader";
 import Searchbar from "../components/Searchbar.js";
-import "./styles/homepage.css";
 
 // Homepage component
 export default function Homepage() {
@@ -23,21 +20,18 @@ export default function Homepage() {
                     {...plant}
                 />
             );
-        }) 
-    : 
+        })
+        :
         <Loader />;
-        
+
     // Render Homepage
     return (
         <div className="homepage-container">
-            {/* <Header isActive={{ home: true }} /> */}
             <Searchbar />
             <Filters />
             <section className="collection-wrapper">
                 {collectionHtml}
             </section>
-
-            {/* <Footer /> */}
         </div>
     );
 };

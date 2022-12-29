@@ -1,6 +1,6 @@
 // Description: Footer component for the app
 import React from "react";
-import "./styles/footer.css";
+// import "./styles/footer.css";
 
 // Footer component
 export default function Footer() {
