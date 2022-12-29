@@ -7,6 +7,7 @@ const CommentSchema = new Schema({
     //this passes a Date object/function?, I am not sure if it will work but it's here as a placeholder.  
     timeStamp: {type: Date}, 
     plantId: {type: String, required:true}
+    user: {type: Schema.Types.ObjectId, ref: "User"}
 })
 
 module.exports = mongoose.model("Comment", CommentSchema)

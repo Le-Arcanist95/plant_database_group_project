@@ -58,10 +58,10 @@ app.get('/trefleAuth', async (req, res) => {
 });
 
 // Routes
-app.use('/register', require('./routes/registerRouter'));
-app.use('/auth', require('./routes/authRouter'));
-app.use('/refresh', require('./routes/refreshRouter'));
-app.use('/logout', require('./routes/logoutRouter'));
+app.use('/auth/register', require('./routes/registerRouter'));
+app.use('/auth/login', require('./routes/authRouter'));
+app.use('/auth/refresh', require('./routes/refreshRouter'));
+app.use('/auth/logout', require('./routes/logoutRouter'));
 app.use('/plants', require('./routes/plantRouter'));
 
 // Middleware for verifying JWT (All routes after must pass through authentication)

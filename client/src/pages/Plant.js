@@ -5,7 +5,6 @@ import PlantContext from "../context/PlantProvider.js";
 // import CommentForm from "../components/CommentForm";
 
 export default function Plant(props) {
-    // Grab plantId from URL
     const plantId = useParams();
     console.log(plantId.plantId);
     const { getPlant, selectedPlant } = useContext(PlantContext);

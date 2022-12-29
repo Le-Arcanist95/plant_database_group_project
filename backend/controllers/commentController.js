@@ -17,10 +17,24 @@ const getComment = async (req, res) => {
 
 // Create comment
 const createComment = async (req, res) => {
-    if(!req?.body?.comment) return res.status(401).json({ msg: 'Comment required' }); // Unauthorized
-    if(!req?.body?.userName) return res.status(401).json({ msg: 'User name required' }); // Unauthorized
-    if(!req?.body?.timeStamp) return res.status(401).json({ msg: 'Time stamp required' }); // Unauthorized
-    if(!req?.body?.plantId) return res.status(401).json({ msg: 'Plant ID required' }); // Unauthorized
+    // Check if comment, user name, time stamp, and plant ID are provided, otherwise return 401 -- Unauthorized
+    if(!req?.body?.comment) 
+        return res.status(401).json({ 
+            msg: 'Comment required' 
+        });
+    if(!req?.body?.userName)
+        return res.status(401).json({ 
+            msg: 'User name required' 
+        }); 
+    if(!req?.body?.timeStamp) 
+        return res.status(401).json({  
+            msg: 'Time stamp required' 
+        }); 
+    if(!req?.body?.plantId) 
+        return res.status(401).json({
+            msg: 'Plant ID required' 
+        }); 
+    req.body.user = req.user._id; // Add user ID to request body    
     const comment = await Comment.create(req.body); // Create comment
     res.json(comment); // Return comment
 }
