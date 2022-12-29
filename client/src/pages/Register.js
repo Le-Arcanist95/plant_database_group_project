@@ -66,6 +66,7 @@ const Register = () => {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true 
             });
+            console.log(response);
             setSuccess(true); setUser(''); setValidName(false); setUserFocus(false); setPwd(''); setValidPwd(false); setPwdFocus(false); setMatchPwd(''); setValidMatch(false); setMatchFocus(false);
         } catch (err) {
             if (!err?.response) {

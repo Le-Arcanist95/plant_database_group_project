@@ -1,45 +1,41 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import PlantContext from "../context/PlantProvider.js";
-import CommentCard from "../components/CommentCard";
-import CommentForm from "../components/CommentForm";
+// import CommentCard from "../components/CommentCard";
+// import CommentForm from "../components/CommentForm";
 
 export default function Plant(props) {
-    // Grab plantId from URL
-    const plantId = useParams()
-    
-    // Context  
-    const {collection} = React.useContext(PlantContext);
-    
-    // Changed to const. It's not being reassigned.
-    const selectedPlant = collection.find(plant => plant.id === plantId.plantId)
+    const plantId = useParams();
+    console.log(plantId.plantId);
+    const { getPlant, selectedPlant } = useContext(PlantContext);
+    console.log(selectedPlant)  
 
-    // console.log(plantId.plantId)
-    // console.log(collection)
-    // console.log(selectedPlant)
-
-    let comments = [
-        {
-            comment: "comment",
-            userName: "userName",
-            timeStamp: Date,
-            plantId: {plantId}
-        },
-        {
-            comment: "comment",
-            userName: "userName",
-            timeStamp: Date,
-            plantId: {plantId}
-        }
-    ]
-    // Updated to use ternary operator
-    const commentsHtml = comments ? comments.map((comment, index) => {
-            return (
-            <CommentCard               
-                key={index}
-                {...comment}
-            />);
-        }) : "";
+    useEffect(() => {
+        getPlant(plantId.plantId);
+    }, [plantId.plantId, getPlant]);
+    
+    // let comments = [
+    //     {
+    //         comment: "comment",
+    //         userName: "userName",
+    //         timeStamp: Date,
+    //         plantId: {plantId}
+    //     },
+    //     {
+    //         comment: "comment",
+    //         userName: "userName",
+    //         timeStamp: Date,
+    //         plantId: {plantId}
+    //     }
+    // ]
+    // // Updated to use ternary operator
+    // const commentsHtml = comments ? comments.map((comment, index) => {
+    //         return (
+    //         <CommentCard               
+    //             key={index}
+    //             {...comment}
+    //         />);
+    //     }) : "";
 
     return (
         <div className="plantpage-container">
@@ -48,8 +44,8 @@ export default function Plant(props) {
             {/* Changed alt attribute. Screen reader will explain "Image of" */}
             <img src={selectedPlant.image_url} alt={`a ${selectedPlant.common_name}`}/>            
             
-            {commentsHtml ? commentsHtml : "No comments yet!"}
-            <CommentForm />
+            {/* {commentsHtml ? commentsHtml : "No comments yet!"} */}
+            {/* <CommentForm /> */}
         </div>
     );
 };

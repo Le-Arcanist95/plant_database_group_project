@@ -5,7 +5,7 @@ const handleRegister = async (req, res) => {
     const { username, password } = req.body; // Get username, password, and confirm password from request body
     if (!username || !password) return res.status(400).json({ msg: 'Please enter all fields' }); // Bad request
 
-    const duplicate = await User.findOne({ username: user }).exec(); // Check if user already exists
+    const duplicate = await User.findOne({ username: username }).exec(); // Check if user already exists
     if (duplicate) return res.status(409).json({ msg: 'User already exists' }); // Conflict
 
     // Hash password
@@ -19,9 +19,9 @@ const handleRegister = async (req, res) => {
             "roles": { "User": 2000 },
             "password": hash
         });
-        
-        console.log(newUser);
-
+        // Save new user to database
+        const response = await newUser.save();
+        console.log(response)
         res.status(201).json({ 'success': `New user ${username} created.`}); // Created
     } catch (err) {
         res.status(500).json({ error: err.message }); // Internal server error

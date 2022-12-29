@@ -18,7 +18,8 @@ const handleRefreshToken = async (req, res) => {
                 if (err) return res.sendStatus(403); //Forbidden
                 const compromisedUser = await User.findOne({ username: decoded.username }).exec(); // Find user with refresh token
                 compromisedUser.refreshToken = []; // Clear refresh token
-                await compromisedUser.save(); // Save changes
+                const result = await compromisedUser.save(); // Save changes
+                console.log(result);
             }
         );
         return res.sendStatus(403); //Forbidden
