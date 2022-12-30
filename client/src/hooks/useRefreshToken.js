@@ -6,7 +6,7 @@ const useRefreshToken = () => {
 
     const refresh = async () => {
         try {
-            const { data } = await backendClient.get('/refresh', { withCredentials: true });
+            const { data } = await backendClient.get('/auth/refresh', { withCredentials: true });
             setAuth(prevAuth => {
                 return { 
                     ...prevAuth,

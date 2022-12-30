@@ -6,7 +6,7 @@ const CommentSchema = new Schema({
     userName: {type: String, max: 50},
     //this passes a Date object/function?, I am not sure if it will work but it's here as a placeholder.  
     timeStamp: {type: Date}, 
-    plantId: {type: String, required:true}
+    plantId: {type: String, required:true},
     user: {type: Schema.Types.ObjectId, ref: "User"}
 })
 

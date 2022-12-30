@@ -9,10 +9,7 @@ export const CommentProvider = ({ children }) => {
     const [userName, setUserName] = useState("");
     const [timeStamp, setTimeStamp] = useState("");
     const [commentId, setCommentId] = useState("");
-    const [inputValue, setInputValue] = useState({search: ""});
-    const [userInput, setUserInput] = useState({
-        // TO DO - state should get automatically updated with the userName 
-    });
+    const [userInput, setUserInput] = useState({});
     
     function addNewComment() {
         const date = new Date();
@@ -29,10 +26,7 @@ export const CommentProvider = ({ children }) => {
     }
     
     return (
-        <CommentContext.Provider value={{
-            inputValue: inputValue,
-            setInputValue: setInputValue
-        }}>
+        <CommentContext.Provider value={{}}>
             {children}
         </CommentContext.Provider>    
     )

@@ -2,7 +2,7 @@
 // Import dependencies
 import React, { useContext } from "react";
 import PlantContext from "../context/PlantProvider.js";
-import CommentContext from "../context/CommentProvider.js";
+import InputContext from "../context/InputProvider.js";
 import { RangeSlider, Toggle } from "rsuite";
 import Collapsible from "./Collapsible.js";
 
@@ -11,7 +11,7 @@ export default function Filters(props) {
 
     // State
     // this object holds all of the values selected by the user prior to them hitting submit. 
-    const { inputValue, setInputValue } = useContext(CommentContext);
+    const { inputValue, setInputValue } = useContext(InputContext);
 
     // Search params passed from context - this is where input will be saved when the user clicks submit. 
     const { setSearchParams } = useContext(PlantContext);

@@ -12,6 +12,7 @@ export default function Plant(props) {
 
     useEffect(() => {
         getPlant(plantId.plantId);
+        // getAllComments(plantId.plantId)
     }, [plantId.plantId, getPlant]);
     
     // let comments = [
