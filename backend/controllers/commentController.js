@@ -2,7 +2,7 @@ const Comment = require('../models/Comment.js');
 
 // Get all comments
 const getAllComments = async (req, res) => {
-    const comments = await Comment.find(); // Find all comments
+    const comments = await Comment.find({ _id: req.params._id }); // Find all comments
     if (!comments) return res.status(404).json({ msg: 'No comments found' }); // Not found
     res.json(comments); // Return comments
 }

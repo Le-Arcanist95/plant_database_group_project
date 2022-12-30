@@ -33,7 +33,7 @@ export const PlantProvider = ({children}) => {
             } 
             // if the user has selected a minimum or maximum soil humidity, add the range below
             if (searchParams.minSoilHumidity) {
-                setSearchFilters(`&range[soil_humidity]=${searchParams.minSoilHumidity},${searchParams.maxSoilHumidity}`)
+                setSearchFilters(`&range[maximum_soil_humidity]=${searchParams.minSoilHumidity},${searchParams.maxSoilHumidity}`)
             }
             // if the user has selected for only edible plants, add the following filter
             if (searchParams.isEdible) {

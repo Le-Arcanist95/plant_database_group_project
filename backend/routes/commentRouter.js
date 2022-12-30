@@ -3,12 +3,12 @@ const commentController = require("../controllers/commentController.js");
 const commentRouter = express.Router();
 
 commentRouter.route("/")
-    // Get all comments
-    .get(commentController.getAllComments)
     // Create comment
     .post(commentController.createComment);
 
 commentRouter.route("/:_id")
+    // Get all comments
+    .get(commentController.getAllComments)
     // Get comment
     .get(commentController.getComment)
     // Update comment
