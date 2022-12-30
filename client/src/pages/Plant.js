@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom"
-import { getAllComments } from "../../../backend/controllers/commentController.js";
 import PlantContext from "../context/PlantProvider.js";
 // import CommentCard from "../components/CommentCard";
 // import CommentForm from "../components/CommentForm";
@@ -13,7 +12,7 @@ export default function Plant(props) {
 
     useEffect(() => {
         getPlant(plantId.plantId);
-        getAllComments(plantId.plantId)
+        // getAllComments(plantId.plantId)
     }, [plantId.plantId, getPlant]);
     
     // let comments = [

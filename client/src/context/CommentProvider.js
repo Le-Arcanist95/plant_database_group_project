@@ -28,10 +28,7 @@ export const CommentProvider = ({ children }) => {
     }
     
     return (
-        <CommentContext.Provider value={{
-            inputValue: inputValue,
-            setInputValue: setInputValue
-        }}>
+        <CommentContext.Provider value={{}}>
             {children}
         </CommentContext.Provider>    
     )
