@@ -7,7 +7,7 @@ const useLogout = () => {
     const logout = async () => {
         setAuth({});
         try {
-            await backendClient('/logout', {
+            await backendClient('/auth/logout', {
                 withCredentials: true
             });
         } catch (err) {

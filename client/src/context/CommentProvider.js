@@ -9,9 +9,7 @@ export const CommentProvider = ({ children }) => {
     const [userName, setUserName] = useState("");
     const [timeStamp, setTimeStamp] = useState("");
     const [commentId, setCommentId] = useState("");
-    const [userInput, setUserInput] = useState({
-        // TO DO - state should get automatically updated with the userName 
-    });
+    const [userInput, setUserInput] = useState({});
     
     function addNewComment() {
         const date = new Date();

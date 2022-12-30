@@ -6,7 +6,7 @@ import useInput from '../hooks/useInput.js';
 // import useToggle from '../hooks/useToggle.js';
 
 // URL for login request -- outside of component so it doesn't get redefined on every render
-const LOGIN_URL = '/auth';
+const LOGIN_URL = '/auth/login';
 
 // Login component
 const Login = () => {
