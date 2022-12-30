@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 import { AuthProvider } from "./context/AuthProvider.js";
 import { PlantProvider } from "./context/PlantProvider.js";
-import { InputProvider } from "./context/InputProvider.js";
+import { CommentProvider } from "./context/CommentProvider.js";
 import App from "./App.js";
 import "./styles.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -20,11 +20,11 @@ root.render(
         <BrowserRouter>
             <AuthProvider>
                 <PlantProvider>
-                    <InputProvider>
+                    <CommentProvider>
                         <Routes>
-                            <Route path="/*" element={<App />}/>
+                            <Route path="/*" element={<App />} />
                         </Routes>
-                    </InputProvider>
+                    </CommentProvider>
                 </PlantProvider>
             </AuthProvider>
         </BrowserRouter>

@@ -1,10 +1,10 @@
 // Purpose: Header component for the app
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./styles/header.css";
 
 
 // TODO: on window load animate logo in 
+
 export default function Header() {
     // Render Header
     return (
@@ -17,7 +17,7 @@ export default function Header() {
 
             {/* HERO */}
             <div className="hero">
-                <span className="logo">PlantProject</span>
+                <h1 className="logo">PlantProject</h1>
             </div>
 
 
