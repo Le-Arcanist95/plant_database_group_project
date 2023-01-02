@@ -19,30 +19,30 @@ export const PlantProvider = ({children}) => {
             .catch(error => console.log(error));
     }, []);
 
+    const filterResults = () => {
+        // if search is undefined, set it to ? (this is for the api call)
+        if (!searchParams.search || searchParams.search === "") {
+            setSearchQuery("?")
+        }
+        // if the search is anything other than the ?  or an empty string, set the search query
+        else if (searchParams.search !== "?" && searchParams.search !== "") {
+            setSearchQuery(`/search?q=${searchParams.search}&`)
+        } 
+        // if the user has selected a minimum or maximum soil humidity, add the range below
+        if (searchParams.minSoilHumidity) {
+            setSearchFilters(`&range[maximum_soil_humidity]=${searchParams.minSoilHumidity},${searchParams.maxSoilHumidity}`)
+        }
+        // if the user has selected for only edible plants, add the following filter
+        if (searchParams.isEdible) {
+            setSearchFilters(prev => {
+                return(
+                `${prev}&filter[edible_part]=roots,stem,leaves,flowers,fruits,seeds`
+            )})        
+        }
+    }
     // runs filter search results any time searchparams is updated 
     useEffect(() => {
         // Purpose: Goes through searchParams and sets the search query and string automatically based on the input. 
-        const filterResults = () => {
-            // if search is undefined, set it to ? (this is for the api call)
-            if (!searchParams.search || searchParams.search === "") {
-                setSearchQuery("?")
-            }
-            // if the search is anything other than the ?  or an empty string, set the search query
-            else if (searchParams.search !== "?" && searchParams.search !== "") {
-                setSearchQuery(`/search?q=${searchParams.search}&`)
-            } 
-            // if the user has selected a minimum or maximum soil humidity, add the range below
-            if (searchParams.minSoilHumidity) {
-                setSearchFilters(`&range[maximum_soil_humidity]=${searchParams.minSoilHumidity},${searchParams.maxSoilHumidity}`)
-            }
-            // if the user has selected for only edible plants, add the following filter
-            if (searchParams.isEdible) {
-                setSearchFilters(prev => {
-                    return(
-                    `${prev}&filter[edible_part]=roots,stem,leaves,flowers,fruits,seeds`
-                )})        
-            }
-        }
         filterResults();
     }, [searchParams])
     
@@ -68,7 +68,8 @@ export const PlantProvider = ({children}) => {
             setSelectedPlant: setSelectedPlant,
             searchParams: searchParams,
             setSearchParams: setSearchParams,
-            getPlant: getPlant
+            getPlant: getPlant,
+            filterResults: filterResults,
         }}>
             {children}
         </PlantContext.Provider>

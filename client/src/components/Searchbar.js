@@ -30,7 +30,7 @@ export default function Searchbar() {
     return (
         <>
             <div className="searchbar-wrapper">
-                <input type="search" name="search" value={inputValue.search} onChange={handleChange} />
+                <input type="search" name="search" value={inputValue.search || ""} onChange={handleChange} />
                 <button onClick={handleSubmit}>
                     <i className="bi bi-search"></i>
                     Search
