@@ -11,6 +11,11 @@ const privateBackendClient = axios.create({
     withCredentials: true,
 });
 
+const trefleToken = backendClient.get('/trefleAuth')
+    .then(response => response.data.token)
+    .catch(error => {console.log(error)});
+
+console.log(trefleToken);
 const trefleClient = axios.create({
     baseURL: 'https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/',
     params: {
